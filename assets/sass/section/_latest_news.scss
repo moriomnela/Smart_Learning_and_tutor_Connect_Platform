@@ -1,0 +1,87 @@
+.latest-news-area{
+    padding: 120px;
+    .section-title {
+      h2 {
+        font-size: 44px;
+        color: $black;
+        text-transform: uppercase;
+      }
+    }
+    .latest_news-card{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 10px;
+        margin-right: 10px;
+        text-decoration: none;
+        transition: .4s;
+        .latest_news-image {
+            img{
+                border-radius: 10px;
+            }
+        }
+        .latest_news-icon {
+          height: 30px;
+            .user{
+                padding-right: 37px;
+                i{
+                    color: $primary_color;
+                    padding-right: 15px;
+                    font-size: 15px;
+                   
+                }
+                .name{
+                    color: $gray;
+                    font-size: 14px;
+                    font-family: $body-font;
+                    transition: .4s;
+                    &:hover{
+                        color: $primary_color;
+                    }
+                }
+            }
+            .cal{
+                i{
+                  color: $primary_color;
+                  padding-right: 15px;
+                  font-size: 15px;
+                }
+                .name{
+                    color: $gray;
+                    font-size: 14px;
+                    font-family: $body-font;
+                    transition: .4s;
+                     &:hover{
+                        color: $primary_color;
+                    }
+                }
+            }
+        }
+    }
+    .latest_news-content{
+      .content{
+        font-size: 28px;
+        font-family: $title-font;
+        font-weight: 600;
+        color: $black;
+        transition: .4s;
+        &:hover {
+            color: $primary_color;
+        }
+      }
+     a{
+        font-size: 16px;
+        font-weight: 600;
+        transition: .4s;
+        i{
+            transition: .4s;
+        }
+        &:hover{
+            color: $primary_color;
+            i{
+                color: $primary_color;
+            }
+        }
+     }
+    }
+  }

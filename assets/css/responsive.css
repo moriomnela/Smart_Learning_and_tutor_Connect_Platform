@@ -1,0 +1,55 @@
+/* ===============================
+   Responsive Media Queries
+   =============================== */
+ 
+   @media (max-width: 1750px) {
+     .custom__container {
+        max-width: 1360px;
+     }
+   }
+/* Extra Extra Large Device */
+@media (max-width: 1500px) {
+  /* ≤ 1500px */
+}
+ 
+/* Medium Large Device */
+@media (max-width: 1399px) {
+  /* ≤ 1399px */
+}
+ 
+/* Extra Large Device */
+@media (max-width: 1299px) {
+  /* ≤ 1299px */
+}
+ 
+/* Large Device (Laptop) */
+@media (max-width: 1199px) {
+  /* ≤ 1199px */
+}
+ 
+/* Medium Device (Tablet) */
+@media (max-width: 991px) {
+  /* ≤ 991px */
+}
+ 
+/* Small Device */
+@media (max-width: 767px) {
+  /* ≤ 767px */
+}
+ 
+/* Extra Small Device */
+@media (max-width: 575px) {
+  /* ≤ 575px */
+}
+ 
+/* Very Extra Small Device  If need*/ 
+@media (max-width: 425px) {
+  /* ≤ 425px */
+}
+ 
+/* Very Extra Small Device */
+@media (max-width: 375px) {
+  /* ≤ 375px */
+}
+ 
+ 

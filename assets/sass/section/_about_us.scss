@@ -1,0 +1,21 @@
+
+.about-us {
+    .about-area {
+        .about-img {
+            overflow: hidden;
+            border-radius: 20px;
+
+            img {
+                border-radius: 20px;
+            }
+        }
+    }
+    &.about-v2 {
+        .subtitle {
+             font-family: "Bangers", system-ui;
+             font-size: 18px;
+        }
+    }
+}
+
+

@@ -1,0 +1,335 @@
+/*==========================================================================
+Common Css
+==========================================================================*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+}
+body {
+    font-family: $body-font;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;  
+}
+a{
+  outline: none;
+  color: inherit;
+  text-decoration: none;
+}
+a,
+button,
+i {
+  text-decoration: none;
+  color: #000000;
+}
+img {
+    max-width: 100%;
+}
+ul{
+    li {
+        list-style: none;
+    }
+}
+span {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 500;
+}
+.section-title {
+  color: $black;
+  font-size: 54px;
+  font-weight: 700;
+  font-family: $title-font;
+  margin-bottom: 100px;
+}
+.subtitle {
+    color: $primary_color;
+    font-size: 36px;
+    font-weight: 500;
+    font-family: $subtitle;
+    margin-bottom: 5px;
+}
+.title {
+  font-size: 44px;
+  color: black;
+  font-family: $body-font;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+p {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 0;
+  margin-bottom: 40px;
+  color: $white;
+  font-family: $body-font;
+}
+.box-text{
+  font-size: 17px;
+  font-family: $body-font;
+  color: #6C6C6C;
+}
+
+.section-padding {
+  padding: 150px 0px;
+}
+
+@media (max-width: 575px) {
+  .section-padding {
+    padding: 90px 0px;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+.img__full {
+  width: 100%;
+}
+
+.custom__container {
+  max-width: 1520px;
+  margin: auto;
+}
+.custom__container_2 {
+  max-width: 1520px;
+  margin: auto;
+}
+
+/*==========================================================================
+Hedging CSS Common
+==========================================================================*/
+h1,h2,h3,h4,h5,h6{
+    font-family: $title-font;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 30px;
+    padding: 0;
+}
+h1 {
+  font-size: 50px;
+  line-height: 54px;
+}
+h2 {
+  font-size: 35px;
+  line-height: 54px;
+}
+
+h3 {
+  font-size: 25px;
+  line-height: 40px;
+  font-weight: 600;
+ 
+}
+h4 {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+h5 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+h6 {
+  font-size: 18px;
+  line-height: 28px;
+  color: #2d2a6e;
+  font-weight: 600;
+}
+
+// Heading responsive
+@media (max-width: 767px) {
+  h2 {
+    font-size: 46px;
+    line-height: 56px;
+  }
+}
+
+@media (max-width: 530px) {
+  h2 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+}
+
+@media (max-width: 460px) {
+  h2 {
+    font-size: 38px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 430px) {
+  h2 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  h3 {
+    font-size: 26px;
+    line-height: 36px;
+  }
+  h4 {
+    font-size: 24px;
+    line-height: 34px;
+  }
+}
+
+/*==========================================================================
+default button
+==========================================================================*/
+.button-1 {
+    border: 1px solid #272A2A;
+    border-color: #EB1400;
+    border-radius: 50px;
+    background: $primary_color;
+    font-size: 13px;
+    font-family: $body-font;
+    color: #fff;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 20px 41px;
+    transition: 0.4s;
+    margin-left: 20px;
+}
+.button-1:hover{
+  background: $heading_color;
+  color: #fff;
+  border-color: $heading_color;
+  //letter-spacing: 6px;
+}
+
+.tp-search-toggle {
+    border: 1px solid $border;
+    background-color: $white;
+    transition: .4s;
+    padding: 13px;
+    border-radius: 50px;
+    i{
+      transition: .4s;
+    }
+    &:hover {
+        background: $red;
+        border: 1px solid $border;
+        i {
+          color: $white;
+        }
+    }
+}
+.header__info-cart a {
+    border: 1px solid $border_color;
+    background-color: $accent_color;
+    transition: .4s;
+    i{
+      transition: .4s;
+    }
+    &:hover {
+        background: $primary_color;
+        border: 1px solid $border_color;
+        i {
+          color: $white;
+        }
+    }
+}
+
+
+.button-2 {
+    border: 1px solid $white;
+    border-color: $primary_color;
+    border-radius: 50px;
+    background: $primary_color;
+    font-size: 16px;
+    font-family: $title-font;
+    color: #fff;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 19px 37px;
+    transition: 0.4s;
+    margin-right: 25px;
+}
+.button-2:hover{
+  background: $black-bg;
+  color: #fff;
+  border-color: $black-bg;
+}
+
+
+.button-3 {
+    border: 1px solid $white;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    background: transparent;
+    font-size: 16px;
+    font-family: $title-font;
+    color: #fff;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 19px 37px;
+    transition: 0.4s;
+    margin-left: 10px;
+}
+.button-3:hover{
+  //background: $primary_color;
+  color: $primary_color;
+  border-color: $primary_color;
+  //letter-spacing: 6px;
+}
+
+.button-4 {
+   border: 1px solid #272A2A;
+    border-color: #96ae00;
+    border-radius: 50px;
+    background: #96ae00;
+    font-size: 11px;
+    color: #fff;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 9px 11px;
+    transition: 0.4s;
+}
+.button-4:hover{
+  background: #2d2a6e;
+  color: #fff;
+  border-color: #2d2a6e;
+  letter-spacing: 3px;
+}
+
+
+
+.section-title-slider-button .section-title-arrow {
+    position: unset;
+    display: flex;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background: wheat;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.section-title-slider-button {
+    display: flex;
+    gap: 20px;
+}
+
+
+
+

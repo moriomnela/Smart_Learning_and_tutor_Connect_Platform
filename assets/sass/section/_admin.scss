@@ -1,0 +1,314 @@
+// Sidebar
+.sidebar {
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  top: 0;  
+  left: 0;
+  background-color: #072f25;
+  padding-top: 20px;  
+  .logo a:hover {
+    background-color: transparent;
+  }
+
+   a {
+    display: block;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: 0.3s;
+    &.active {
+      background-color: #FF9924;
+    }
+
+    &:hover {
+      background-color: #EB1400;
+    }
+  }
+}
+
+// Contact Msg
+.contact-msg {
+  margin-left: 210px;
+  padding: 20px;
+
+  h2 {
+    color: #072f25;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #072f25;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+}
+
+// Product add form
+.product-add-form {
+    max-width: 700px;
+    margin-top: 50px;
+
+    h2 {
+        text-align: center;
+        color: #072f25;
+        margin-bottom: 30px;
+    }
+
+    form {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .form-group {
+            margin-bottom: 15px;
+
+            label {
+                font-weight: bold;
+                color: #072f25;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            input[type="file"] {
+                padding: 3px;
+            }
+        }
+
+        button {
+            background-color: #EB1400;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: #FF9924;
+            }
+        }
+    }
+}
+
+/* Product View */
+.products-view {
+  flex: 1;
+  padding: 30px;
+  margin-left: 210px;
+
+  .page-title {
+    margin-bottom: 20px;
+    color: #072f25;
+  }
+  .product-table-wrapper {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  }
+  
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+  
+    thead {
+      background: #072f25;
+      color: #fff;
+    }
+  
+    td {
+      height: 95px;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+  
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  }
+  
+  .in-stock {
+    color: #0a8a3a;
+    font-weight: bold;
+  }
+  
+  .out-stock {
+    color: #EB1400;
+    font-weight: bold;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  
+    a {
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #fff;
+    }
+  
+    .edit-btn {
+      background: #FF9924;
+    }
+  
+    .delete-btn {
+      background: #EB1400;
+    }
+  }
+}
+
+
+// Users
+.users-view{
+  max-width: 1200px;
+  margin: 50px auto;
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #072f25;
+  }
+
+  .user-table-wrapper {
+    overflow-x: auto;
+
+    .user-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+
+      th, td {
+        padding: 12px 15px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #072f25;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f4f4f4;
+      }
+
+      .active {
+        color: #0f9d58;
+        font-weight: bold;
+      }
+
+      .inactive {
+        color: #eb1400;
+        font-weight: bold;
+      }
+
+      .actions {
+        a {
+          text-decoration: none;
+          padding: 5px 10px;
+          margin: 0 2px;
+          border-radius: 4px;
+          font-size: 14px;
+          &.edit-btn {
+            background-color: #072f25;
+            color: #fff;
+          }
+          &.delete-btn {
+            background-color: #eb1400;
+            color: #fff;
+          }
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
+
+// All Orders
+.all-orders {
+    max-width: 1200px;
+    margin: 50px auto;   
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+        font-size: 28px;
+    }
+
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #072f25;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    }
+
+    .no-orders {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+        padding: 50px 0;
+    }
+}
