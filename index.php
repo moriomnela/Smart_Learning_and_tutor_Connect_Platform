@@ -67,16 +67,6 @@
                                     <div class="call-icon">
                                         <i class="fas fa-user"></i>
                                     </div>
-                                    <?php
-                                    session_start();
-                                    if (isset($_SESSION['user_id'])) {
-                                        // User logged in
-                                        echo '<a href="actions/logout.php">Logout</a>';
-                                    } else {
-                                        // User not logged in
-                                        echo '<a href="login.php">Login/Signup</a>';
-                                    }
-                                    ?>
                                 </div>
                                 <div class="social-icons">
                                     <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
@@ -145,7 +135,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-6">
                                 <div class="slider-text">
-                                    <h1 class="wow fadeInUp animated">Healthy & Delicious Vegan Dishes Guilt Free Eating</h1>
+                                    <h1 class="wow fadeInUp animated">Online Education Feels Like Real Classroom</h1>
                                     <p class="wow fadeInUp animated"> Fresh, organic, and eco-friendly meals made with love. Experience healthy eating that’s sustainable and delicious</p>
                                     <div class="btn-group">
                                         <a href="" class="button-2 wow fadeInDown animated">order now</a>
@@ -155,13 +145,13 @@
                             </div>
                             <div class="col-xl-5 col-lg-6">
                                 <div class="banner-img">
-                                    <img src="assets/img/banner_img/banner_img_1.png"
+                                    <img src="assets/img/banner_img/hero_image1.png"
                                         class="wow animate__animated animate__fadeInRight" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide single-banner-slider">
+                    <!-- <div class="swiper-slide single-banner-slider">
                         <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-6">
                                 <div class="slider-text">
@@ -175,15 +165,15 @@
                             </div>
                             <div class="col-xl-5 col-lg-6">
                                 <div class="banner-img">
-                                    <img src="assets/img/banner_img/banner_img_2.jpg"
+                                    <img src="assets/img/banner_img/.jpg"
                                         class="wow animate__animated animate__fadeInRight" alt="">
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- pagination -->
                 </div>
-                <div class="swiper-pagination"></div>
+                <!-- <div class="swiper-pagination"></div> -->
             </div>
         </section>
         <!--Slider - area End-->
@@ -1044,8 +1034,6 @@
                                                     </svg>
                                                 </div>
                                             </div>
-
-                                            <a href='addToCart.php?.id=<?php echo $row["prodect_id"] ?>' class="button-2">Add to cart</a>
 
                                             <div class="favorite-button">
                                                 <div class="icon">
