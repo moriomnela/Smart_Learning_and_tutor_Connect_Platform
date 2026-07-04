@@ -1,0 +1,187 @@
+.popular-courses-section {
+    padding: 7rem 0;
+    background-color: #f4f7fa;
+
+    .section-header {
+        .badge-top {
+            display: inline-block;
+            background-color: rgba($primary, 0.06);
+            color: $primary;
+            font-family: $font-heading;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba($primary, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.05rem;
+            color: #0e2a47;
+            margin-bottom: 0;
+        }
+    }
+
+    /* Minimalistic Slider Arrow Controls */
+    .course-slider-nav {
+        gap: 0.75rem;
+
+        .course-prev,
+        .course-next {
+            width: 45px;
+            height: 45px;
+            background-color: $white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            color: #0e2a47;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: $transition;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+
+            &:hover {
+                background-color: #2b6eff;
+                color: $white;
+                border-color: #2b6eff;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    /* Edura Card Core Architecture Matcher */
+    .edura-course-card {
+        background-color: $white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .card-thumb {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .time-badge {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background-color: #ff1e1e;
+                color: $white;
+                font-family: $font-heading;
+                font-size: 0.85rem;
+                font-weight: 700;
+                padding: 0.4rem 1rem;
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                z-index: 2;
+            }
+        }
+
+        .card-body-content {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .rating-layer {
+                margin-bottom: 1rem;
+
+                .stars {
+                    color: #2b6eff;
+                    font-size: 0.85rem;
+                }
+
+                .rating-text {
+                    font-size: 0.85rem;
+                    color: #4a5e73;
+                    font-weight: 600;
+                }
+            }
+
+            .course-title-text {
+                font-size: 1.35rem;
+                font-weight: 700;
+                line-height: 1.4;
+                color: #0e2a47;
+                margin-bottom: 1.25rem;
+
+                a {
+                    color: #0e2a47;
+                    text-decoration: none;
+                    transition: $transition;
+
+                    &:hover {
+                        color: #2b6eff;
+                    }
+                }
+            }
+
+            .course-specs {
+                font-size: 0.85rem;
+                color: #748494;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+
+                i {
+                    margin-right: 4px;
+                }
+            }
+
+            .card-footer-layer {
+                margin-top: auto;
+                padding-top: 1.25rem;
+                border-top: 1px dashed #d1d9e0;
+
+                .author-block {
+                    .author-avatar-fallback {
+                        width: 36px;
+                        height: 36px;
+                        background-color: #3b66f5;
+                        color: $white;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: $font-heading;
+                        font-weight: 700;
+                        font-size: 0.95rem;
+                    }
+
+                    .author-name {
+                        font-size: 1.05rem;
+                        font-weight: 700;
+                        color: #0e2a47;
+                    }
+                }
+
+                .price-tag {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    color: #ff1e1e;
+                    font-family: $font-heading;
+                }
+            }
+        }
+
+        &:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(#0e2a47, 0.05);
+        }
+    }
+}

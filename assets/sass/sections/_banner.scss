@@ -1,0 +1,209 @@
+/* ==========================================================================
+   Modern Banner Component with CSS Shapes and Dynamic Backgrounds
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    padding: 12rem 0 8rem 0;
+    min-height: 95vh;
+    background: radial-gradient(circle at 10% 20%, rgba($primary, 0.06) 0%, rgba($bg-light, 1) 90%);
+    overflow: hidden;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: 1;
+    }
+
+    &::before {
+        top: -10%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: rgba($primary, 0.1);
+    }
+
+    &::after {
+        bottom: 10%;
+        right: 15%;
+        width: 500px;
+        height: 500px;
+        background: rgba($secondary, 0.08);
+    }
+
+    .container {
+        position: relative;
+        z-index: 5;
+    }
+
+    .badge-top {
+        display: inline-block;
+        background-color: rgba($primary, 0.08);
+        color: $primary;
+        font-family: $font-heading;
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba($primary, 0.1);
+    }
+
+    .hero-title {
+        font-size: 3.8rem;
+        font-weight: 900;
+        line-height: 1.15;
+        letter-spacing: -0.1rem;
+        margin-bottom: 1.5rem;
+
+        .highlight {
+            color: $primary;
+            background: linear-gradient(120deg, $primary 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .hero-desc {
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        max-width: 85%;
+        color: $text-muted;
+    }
+
+    .hero-buttons {
+        .btn-primary-custom {
+            font-family: $font-heading;
+            font-weight: 600;
+            background-color: $primary;
+            color: $white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba($primary, 0.25);
+            border: 2px solid $primary;
+            transition: $transition;
+
+            &:hover {
+                background-color: darken($primary, 5%);
+                transform: translateY(-3px);
+                box-shadow: 0 12px 30px rgba($primary, 0.35);
+            }
+        }
+
+        .btn-outline-custom {
+            font-family: $font-heading;
+            font-weight: 600;
+            background-color: transparent;
+            color: $text-dark;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            border: 2px solid rgba($text-dark, 0.15);
+            transition: $transition;
+
+            &:hover {
+                background-color: $text-dark;
+                color: $white;
+                border-color: $text-dark;
+                transform: translateY(-3px);
+            }
+        }
+    }
+
+    .hero-stats {
+        gap: 2rem;
+
+        .stat-item {
+            h4 {
+                font-size: 2rem;
+                font-weight: 800;
+                color: $text-dark;
+                margin-bottom: 0.1rem;
+            }
+        }
+
+        .stat-border {
+            width: 1px;
+            height: 45px;
+            background-color: rgba($text-dark, 0.1);
+        }
+    }
+
+    /* 🎯 Image positioned perfectly to the right-0 with premium shapes */
+    .hero-graphic-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48%;
+        height: 100%;
+        z-index: 2;
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            /* Sophisticated structural geometric clip shape */
+            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba($bg-light, 0.2), transparent);
+                z-index: 3;
+            }
+
+            .main-hero-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+                transform: scale(1.02);
+                transition: transform 6s ease;
+            }
+        }
+
+        &:hover .main-hero-img {
+            transform: scale(1.08);
+        }
+    }
+
+    @include respond-to('desktop') {
+        padding: 10rem 0 4rem 0;
+        text-align: center;
+
+        .hero-title {
+            font-size: 2.8rem;
+        }
+
+        .hero-desc {
+            max-width: 100%;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .hero-stats {
+            justify-content: center;
+        }
+
+        .hero-graphic-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            margin-top: 3rem;
+
+            .image-container {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                border-radius: $border-radius * 2;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}

@@ -1,7 +1,15 @@
-/*Default*/
-@import "default/all";
-/*Section*/
-@import "section/all";
+/* 1. Configuration and Variables */
+@import 'abstract/variables';
+@import 'abstract/mixins';
 
-// @use "default/all" as *;
-// @use "section/all" as *;
+/* 2. Base Document Reset and Typography */
+@import 'base/reset';
+@import 'base/typography';
+
+/* 3. Layout and Section Components */
+@import 'layout/header';
+@import 'sections/banner';
+@import 'sections/categories';
+@import 'sections/popular-courses';
+@import 'sections/instructor-cta';
+@import 'layout/footer';

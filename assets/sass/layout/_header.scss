@@ -1,0 +1,112 @@
+.main-header {
+    background: rgb(255 255 255 / 57%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+
+  .navbar {
+    padding: 1rem 0;
+  }
+
+  .logo {
+    font-family: $font-heading;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $text-dark;
+    letter-spacing: -0.05rem;
+
+    span {
+      color: #F59E0B;
+      margin-left: -9px;
+    }
+  }
+
+  .nav-list {
+    .nav-link {
+      font-family: $font-heading;
+      font-weight: 500;
+      color: $text-dark;
+      padding: 0.5rem 1.2rem !important;
+      transition: $transition;
+      position: relative;
+
+      &:hover,
+      &.active {
+        color: $primary;
+
+        &::after {
+          width: 60%;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 1.2rem;
+        width: 0;
+        height: 2px;
+        background-color: $secondary;
+        transition: $transition;
+      }
+    }
+  }
+
+  .nav-actions {
+    .btn-signin {
+      font-family: $font-heading;
+      font-weight: 600;
+      color: $text-dark;
+      transition: $transition;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .btn-cta {
+      font-family: $font-heading;
+      font-weight: 600;
+      background-color: $secondary;
+      color: $text-dark;
+      padding: 0.65rem 1.5rem;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+      transition: $transition;
+
+      &:hover {
+        background-color: darken($secondary, 8%);
+        transform: translateY(-2px);
+        color: $text-dark;
+      }
+    }
+  }
+
+  /* Mobile and tablet responsive adjustment styles */
+  @include respond-to('tablet') {
+    .nav-list {
+      padding: 1rem 0;
+
+      .nav-link::after {
+        display: none;
+      }
+    }
+
+    .nav-actions {
+      flex-direction: column;
+      align-items: flex-start !important;
+      width: 100%;
+      gap: 1rem;
+
+      .btn-cta {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

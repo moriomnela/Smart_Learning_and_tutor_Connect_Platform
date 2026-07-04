@@ -1,0 +1,42 @@
+/* Global Margin/Padding Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HTML Base Styles */
+html {
+  scroll-behavior: smooth;
+  font-size: 100%; // Ensures base font size is set by browser defaults or other rules
+}
+
+/* Body Base Styles */
+body {
+  background-color: $bg-light;
+  color: $text-dark;
+  font-family: $font-body;
+  line-height: 1.6;
+}
+
+/* Responsive Images/SVGs */
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Global Link Styles */
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    color: $secondary;
+    text-decoration: none;
+  }
+}
