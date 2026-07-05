@@ -28,7 +28,7 @@
 
     <div class="hero-graphic-wrapper">
         <div class="image-container">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop" alt="Smart Learning SLTCP Platform" class="main-hero-img">
+            <img src="assets/img/banner/banner_img.avif" alt="Smart Learning SLTCP Platform" class="main-hero-img">
         </div>
     </div>
 </section>

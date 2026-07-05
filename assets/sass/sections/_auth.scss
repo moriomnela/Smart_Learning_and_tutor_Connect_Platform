@@ -1,0 +1,335 @@
+.auth-page-section {
+    background-color: $white;
+
+/* Left Split Side: Deep Premium Aesthetic Frame with Tech Elements */
+    .brand-side-wrapper {
+        background-color: #051329;
+        /* Deep Futuristic Midnight Navy */
+        background-image:
+            linear-gradient(rgba(#2b6eff, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(#2b6eff, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+        /* Subtle Tech Grid Mesh Overlay */
+        padding: 5rem 4rem;
+        position: relative;
+        overflow: hidden;
+
+        /* Ambient Neumorphic Light Leak Orbs */
+        .ambient-glow-orb-1 {
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(#2b6eff, 0.18) 0%, transparent 70%);
+            filter: blur(50px);
+            z-index: 1;
+        }
+
+        .ambient-glow-orb-2 {
+            position: absolute;
+            bottom: -15%;
+            right: -10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(#ffb100, 0.08) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .brand-content-overlay {
+            max-width: 520px;
+            margin: 0 auto;
+            color: $white;
+            position: relative;
+            z-index: 5;
+
+            .welcome-title {
+                font-size: 2.5rem;
+                font-weight: 900;
+                line-height: 1.25;
+                letter-spacing: -0.05rem;
+                margin-bottom: 1.25rem;
+                font-family: $font-heading;
+                background: linear-gradient(135deg, #ffffff 60%, rgba(#ffffff, 0.7));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .welcome-desc {
+                font-size: 1rem;
+                color: #94a3b8;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* High-End Glassmorphic Stats Layout */
+        .auth-stats-grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            width: 100%;
+
+            .stat-item-card {
+                flex: 1;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 1.5rem 1rem;
+                border-radius: 18px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transition: $transition;
+
+                h4 {
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: $white;
+                    margin-bottom: 4px;
+                    font-family: $font-heading;
+                }
+
+                p {
+                    font-size: 0.8rem;
+                    color: #64748b;
+                    margin-bottom: 0;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05rem;
+                }
+
+                &:hover {
+                    transform: translateY(-4px);
+                    background: rgba(255, 255, 255, 0.04);
+                    border-color: rgba(#2b6eff, 0.2);
+                    box-shadow: 0 15px 35px rgba(#2b6eff, 0.1);
+                }
+            }
+        }
+    }
+
+    /* Right Split Side: Super Clean Minimalist Form Slot */
+    .form-side-wrapper {
+        padding: 4rem 2rem;
+        background-color: #fafbfc;
+
+        .auth-form-card {
+            width: 100%;
+            max-width: 420px;
+            background: $white;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(14, 42, 71, 0.03);
+            box-shadow: 0 15px 45px rgba(14, 42, 71, 0.02);
+
+            .auth-title {
+                font-size: 1.85rem;
+                font-weight: 800;
+                color: #0e2a47;
+                letter-spacing: -0.03rem;
+                margin-bottom: 0.35rem;
+            }
+
+            .auth-subtitle {
+                font-size: 0.925rem;
+                color: #748494;
+                margin: 0;
+
+                .link-trigger {
+                    color: #2b6eff;
+                    font-weight: 700;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Social Integration Anchor Button */
+    .btn-social-auth {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        background-color: $white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        color: #334e68;
+        font-size: 0.925rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: $transition;
+
+        &:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+    }
+
+    /* Elegant Text Divider Line */
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #94a3b8;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        &:not(:empty)::before {
+            margin-right: 1rem;
+        }
+
+        &:not(:empty)::after {
+            margin-left: 1rem;
+        }
+    }
+
+    /* High-End Input Control Mechanism */
+    .input-group-block {
+        text-align: left;
+
+        .form-label-custom {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #334e68;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .link-forgot {
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: #748494;
+            text-decoration: none;
+
+            &:hover {
+                color: #2b6eff;
+            }
+        }
+
+        .input-control-wrap {
+            position: relative;
+            width: 100%;
+
+            .input-icon-slot {
+                position: absolute;
+                top: 50%;
+                left: 16px;
+                transform: translateY(-50%);
+                color: #94a3b8;
+                font-size: 1rem;
+                pointer-events: none;
+            }
+
+            .form-input-custom {
+                width: 100%;
+                padding: 0.8rem 1rem 0.8rem 46px;
+                font-size: 0.95rem;
+                color: #0e2a47;
+                background-color: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                transition: $transition;
+
+                &:focus {
+                    outline: none;
+                    border-color: #2b6eff;
+                    box-shadow: 0 0 0 4px rgba(#2b6eff, 0.08);
+                    background-color: $white;
+                }
+            }
+
+            .password-toggle-slot {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                color: #94a3b8;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    color: #0e2a47;
+                }
+            }
+        }
+    }
+
+    /* Custom Checkbox Config */
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-left: 0;
+
+        .form-check-input-custom {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:checked {
+                background-color: #2b6eff;
+                border-color: #2b6eff;
+            }
+        }
+
+        .form-check-label-custom {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    /* Core Submit Trigger Action Button */
+    .btn-auth-submit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-family: $font-heading;
+        font-weight: 700;
+        background-color: #0e2a47;
+        color: $white;
+        padding: 0.9rem 2rem;
+        border-radius: 12px;
+        border: none;
+        font-size: 0.95rem;
+        transition: $transition;
+        box-shadow: 0 5px 15px rgba(#0e2a47, 0.1);
+
+        i {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            background-color: #2b6eff;
+            box-shadow: 0 10px 20px rgba(#2b6eff, 0.2);
+
+            i {
+                transform: translateX(4px);
+            }
+        }
+    }
+}

@@ -1,0 +1,205 @@
+.premium-faq-section {
+    padding: 7rem 0;
+    background-color: #fafbfc;
+
+    .section-header {
+        .badge-top {
+            display: inline-block;
+            background-color: rgba(#2b6eff, 0.05);
+            color: #2b6eff;
+            font-family: $font-heading;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba(#2b6eff, 0.08);
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #0e2a47;
+            letter-spacing: -0.05rem;
+
+            .highlight-text {
+                color: #2b6eff;
+            }
+        }
+    }
+
+    /* Left Sidebar Widgets Styling with Sticky Lock */
+    .faq-sidebar-wrapper {
+        position: sticky;
+        top: 100px;
+        /* Locks the sidebar beautifully while scrolling the accordion */
+        height: fit-content;
+
+        .faq-image-box {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(14, 42, 71, 0.04);
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+
+            &:hover img {
+                transform: scale(1.03);
+            }
+        }
+
+        .faq-widget-card {
+            background: $white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(14, 42, 71, 0.03);
+            box-shadow: 0 8px 25px rgba(14, 42, 71, 0.01);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: $transition;
+
+            .widget-icon {
+                width: 44px;
+                height: 44px;
+                background-color: rgba(#2b6eff, 0.06);
+                color: #2b6eff;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.15rem;
+                flex-shrink: 0;
+
+                &.live-chat {
+                    background-color: rgba(#10b981, 0.06);
+                    color: #10b981;
+                }
+            }
+
+            .widget-info {
+                h5 {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: #0e2a47;
+                    margin-bottom: 4px;
+                }
+
+                p {
+                    font-size: 0.85rem;
+                    color: #748494;
+                    line-height: 1.5;
+                    margin-bottom: 8px;
+                }
+
+                .widget-link {
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    color: #0e2a47;
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    transition: $transition;
+
+                    i {
+                        font-size: 0.75rem;
+                        transition: transform 0.2s ease;
+                    }
+
+                    &:hover {
+                        color: #2b6eff;
+
+                        i {
+                            transform: translateX(3px);
+                        }
+                    }
+
+                    &.chat-color {
+                        color: #10b981;
+
+                        &:hover {
+                            color: darken(#10b981, 10%);
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                transform: translateY(-3px);
+                border-color: rgba(#2b6eff, 0.1);
+                box-shadow: 0 12px 30px rgba(14, 42, 71, 0.04);
+            }
+        }
+    }
+
+    /* Luxury Accordion Overrides */
+    .custom-luxury-accordion {
+        .accordion-item {
+            background-color: $white;
+            border: 1px solid rgba(14, 42, 71, 0.04);
+            border-radius: 16px !important;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(14, 42, 71, 0.005);
+            transition: all 0.3s ease;
+
+            &:hover {
+                border-color: rgba(#2b6eff, 0.12);
+                box-shadow: 0 10px 30px rgba(14, 42, 71, 0.02);
+            }
+        }
+
+        .accordion-button {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0e2a47;
+            padding: 1.5rem 2rem;
+            background-color: $white;
+            box-shadow: none;
+            transition: all 0.3s ease;
+
+            &::after {
+                background-size: 1.1rem;
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            &:not(.collapsed) {
+                color: #2b6eff;
+                background-color: rgba(#2b6eff, 0.005);
+                border-bottom: 1px solid rgba(14, 42, 71, 0.02);
+            }
+        }
+
+        .accordion-body {
+            padding: 1.5rem 2rem;
+            font-size: 0.975rem;
+            color: #748494;
+            line-height: 1.65;
+            background-color: rgba(#2b6eff, 0.002);
+        }
+    }
+
+    @include respond-to('desktop') {
+        padding: 5rem 0;
+
+        .faq-sidebar-wrapper {
+            margin-bottom: 3rem;
+        }
+
+        .custom-luxury-accordion .accordion-button {
+            font-size: 1rem;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .custom-luxury-accordion .accordion-body {
+            padding: 1.25rem 1.5rem;
+        }
+    }
+}

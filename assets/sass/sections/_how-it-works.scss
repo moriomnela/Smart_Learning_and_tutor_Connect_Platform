@@ -1,0 +1,148 @@
+.how-it-works-section {
+    padding: 8rem 0;
+    background-color: #fafbfc;
+    position: relative;
+    overflow: hidden;
+
+    .section-header {
+        margin-bottom: 5rem;
+
+        .badge-top {
+            display: inline-block;
+            background-color: rgba(#2b6eff, 0.05);
+            color: #2b6eff;
+            font-family: $font-heading;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(#2b6eff, 0.08);
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.06rem;
+            color: #0e2a47;
+
+            .highlight-text {
+                color: #2b6eff;
+            }
+        }
+    }
+
+    /* Absolute Timeline Connecting Vector Path */
+    .steps-timeline-container {
+        position: relative;
+        width: 100%;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 65px;
+            /* Center aligned with the icon circles */
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: image-url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="2"><line x1="0" y1="1" x2="100" y2="1" stroke="%232b6eff" stroke-width="2" stroke-dasharray="6,6"/></svg>');
+            background-repeat: repeat-x;
+            z-index: 1;
+            opacity: 0.4;
+        }
+    }
+
+    /* Premium Futuristic Step Card */
+    .luxury-step-card {
+        background: $white;
+        padding: 3rem 2.25rem;
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(#0e2a47, 0.02);
+        border: 1px solid rgba(14, 42, 71, 0.03);
+        text-align: center;
+        height: 100%;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background-color: #f4f7fa;
+            color: #0e2a47;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 2rem auto;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+
+            /* Floating Neumorphic Step Pill */
+            .step-number {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                width: 28px;
+                height: 28px;
+                background-color: #2b6eff;
+                color: $white;
+                font-size: 0.75rem;
+                font-weight: 800;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 10px rgba(#2b6eff, 0.3);
+                border: 2px solid $white;
+                font-family: $font-heading;
+            }
+        }
+
+        .step-heading {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0e2a47;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02rem;
+        }
+
+        .step-caption {
+            font-size: 0.95rem;
+            color: #748494;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* Interaction Engine */
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(#0e2a47, 0.06);
+            border-color: rgba(#2b6eff, 0.15);
+
+            .icon-wrapper {
+                background-color: #2b6eff;
+                color: $white;
+                transform: scale(1.05) rotate(-5deg);
+            }
+        }
+    }
+
+    /* Responsive Breakpoint Engine */
+    @include respond-to('desktop') {
+        padding: 5rem 0;
+
+        .steps-timeline-container::before {
+            display: none;
+        }
+
+        /* Kill line on stacked view */
+        .luxury-step-card {
+            padding: 2.5rem 1.75rem;
+        }
+    }
+}
