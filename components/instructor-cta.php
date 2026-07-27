@@ -25,7 +25,7 @@
                 <div class="col-lg-6">
                     <div class="cta-visual-container">
                         <div class="main-image-frame">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Instructor Platform" class="instructor-main-img">
+                            <img src="assets/img/popular_teacher/teacher4.avif" alt="Instructor Platform" class="instructor-main-img">
                         </div>
 
                         <div class="floating-stat-card">

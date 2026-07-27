@@ -982,6 +982,195 @@ h6 {
   box-shadow: 0 20px 40px rgba(14, 42, 71, 0.05);
 }
 
+.find-courses {
+  padding: 4rem 1.5rem;
+  background-color: #F8FAFC;
+  /* Header Styles */
+  /* Filter Bar Section */
+  /* Grid Layout */
+}
+.find-courses__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.find-courses__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.find-courses__header .find-courses__title {
+  color: #0F172A;
+  margin-bottom: 0.5rem;
+}
+.find-courses__filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+  .find-courses__filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.find-courses__search {
+  display: flex;
+  flex: 1;
+  min-width: 280px;
+  gap: 0.5rem;
+}
+@media (max-width: 576px) {
+  .find-courses__search {
+    flex-direction: column;
+  }
+}
+.find-courses__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(186.3723849372, 194.2719665272, 205.6276150628);
+  border-radius: calc(12px / 2);
+  font-family: "Roboto", sans-serif;
+  outline: none;
+}
+.find-courses__input:focus {
+  border-color: #1E3A8A;
+}
+.find-courses__btn-search {
+  background-color: #1E3A8A;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: calc(12px / 2);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+.find-courses__btn-search:hover {
+  background-color: rgb(20.8928571429, 40.3928571429, 96.1071428571);
+}
+.find-courses__select-group {
+  display: flex;
+  gap: 0.75rem;
+}
+@media (max-width: 576px) {
+  .find-courses__select-group {
+    flex-direction: column;
+  }
+}
+.find-courses__select {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(186.3723849372, 194.2719665272, 205.6276150628);
+  border-radius: calc(12px / 2);
+  background-color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  color: #0F172A;
+  cursor: pointer;
+  outline: none;
+}
+.find-courses__select:focus {
+  border-color: #1E3A8A;
+}
+.find-courses__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+@media (max-width: 992px) {
+  .find-courses__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .find-courses__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.course-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+}
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.course-card__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #F59E0B;
+  color: #0F172A;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.course-card__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.course-card__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.course-card__category {
+  font-size: 0.85rem;
+  color: #1E3A8A;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.course-card__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.course-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(201.2029288703, 207.3953974895, 216.2970711297);
+  margin-bottom: 1rem;
+}
+.course-card__rating {
+  color: #F59E0B;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.course-card__price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+.course-card__btn {
+  display: block;
+  text-align: center;
+  background-color: #1E3A8A;
+  color: #ffffff;
+  padding: 0.75rem;
+  border-radius: calc(12px / 2);
+  font-weight: 600;
+}
+.course-card__btn:hover {
+  background-color: #F59E0B;
+  color: #0F172A;
+}
+
 .popular-teachers-section {
   padding: 7rem 0;
   background-color: #f8fafc;

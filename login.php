@@ -2,6 +2,10 @@
 include 'components/template-top.php';
 ?>
 
+<?php
+include "config/db.php";
+?>
+
 <section class="auth-page-section">
     <div class="container-fluid p-0">
         <div class="row g-0 min-vh-100">

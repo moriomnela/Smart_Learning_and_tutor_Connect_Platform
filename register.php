@@ -1,14 +1,16 @@
 <?php
 include 'components/template-top.php';
 ?>
+<?php
+include "config/db.php";
+?>
+
 
 <section class="auth-page-section">
     <div class="container-fluid p-0">
         <div class="row g-0 min-vh-100">
 
-            <!-- Left Column: Visual Brand Block (Synchronized with Login) -->
             <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center brand-side-wrapper">
-                <!-- Glowing Ambient Orbs for Premium Tech Aesthetic -->
                 <div class="ambient-glow-orb-1"></div>
                 <div class="ambient-glow-orb-2"></div>
 
@@ -106,9 +108,10 @@ include 'components/template-top.php';
 
                         <!-- Terms and Conditions Checkbox -->
                         <div class="form-check mb-4">
-                            <input class="form-check-input-custom" type="checkbox" id="termsAgreement" name="terms" required>
+                            
+                        <input class="form-check-input-custom" type="checkbox" id="termsAgreement" name="terms" required>
                             <label class="form-check-label-custom" for="termsAgreement">
-                                I agree to the <a href="terms.php" class="text-decoration-none style-color" style="color: #2b6eff; fw-bold">Terms of Service</a> & Privacy Policy
+                                I agree to the Terms of Service</a> & Privacy Policy
                             </label>
                         </div>
 

@@ -18,7 +18,7 @@
                 <div class="swiper-slide">
                     <div class="premium-teacher-card">
                         <div class="teacher-thumb-box">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Instructor Profile" class="teacher-img">
+                            <img src="assets/img/popular_teacher/teacher1.avif" alt="Instructor Profile" class="teacher-img">
 
                             <div class="social-flyout">
                                 <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -41,7 +41,7 @@
                 <div class="swiper-slide">
                     <div class="premium-teacher-card">
                         <div class="teacher-thumb-box">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="Instructor Profile" class="teacher-img">
+                            <img src="assets/img/popular_teacher/teacher3.avif" alt="Instructor Profile" class="teacher-img">
                             <div class="social-flyout">
                                 <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
                                 <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
@@ -63,7 +63,7 @@
                 <div class="swiper-slide">
                     <div class="premium-teacher-card">
                         <div class="teacher-thumb-box">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Instructor Profile" class="teacher-img">
+                            <img src="assets/img/popular_teacher/teacher2.avif" alt="Instructor Profile" class="teacher-img">
                             <div class="social-flyout">
                                 <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
                                 <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
@@ -85,7 +85,7 @@
                 <div class="swiper-slide">
                     <div class="premium-teacher-card">
                         <div class="teacher-thumb-box">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" alt="Instructor Profile" class="teacher-img">
+                            <img src="assets/img/popular_teacher/teacher4.avif" alt="Instructor Profile" class="teacher-img">
                             <div class="social-flyout">
                                 <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
                                 <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>

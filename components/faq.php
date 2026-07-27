@@ -17,7 +17,7 @@
 
                     <!-- Modern Framed Image -->
                     <div class="faq-image-box mb-4">
-                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=500&auto=format&fit=crop" alt="Support Team" class="img-fluid">
+                        <img src="assets/img/cta/faq.avif" alt="Support Team" class="img-fluid">
                     </div>
 
                     <!-- Widget 1: Direct Support Hotline -->

@@ -21,7 +21,7 @@
                 <div class="swiper-slide">
                     <div class="edura-course-card">
                         <div class="card-thumb">
-                            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=500&auto=format&fit=crop" alt="Course Image">
+                            <img src="assets/img/popular_courses/img1.avif" alt="Course Image">
                             <span class="time-badge"><i class="fa-regular fa-clock"></i> 7h 30m</span>
                         </div>
                         <div class="card-body-content">
@@ -52,7 +52,7 @@
                 <div class="swiper-slide">
                     <div class="edura-course-card">
                         <div class="card-thumb">
-                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=500&auto=format&fit=crop" alt="Course Image">
+                            <img src="assets/img/popular_courses/img2.avif" alt="Course Image">
                             <span class="time-badge"><i class="fa-regular fa-clock"></i> 5h 15m</span>
                         </div>
                         <div class="card-body-content">
@@ -83,7 +83,7 @@
                 <div class="swiper-slide">
                     <div class="edura-course-card">
                         <div class="card-thumb">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop" alt="Course Image">
+                            <img src="assets/img/popular_courses/img3.avif" alt="Course Image">
                             <span class="time-badge"><i class="fa-regular fa-clock"></i> 10h 0m</span>
                         </div>
                         <div class="card-body-content">

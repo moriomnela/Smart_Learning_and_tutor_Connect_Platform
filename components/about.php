@@ -1,14 +1,14 @@
 <section class="about-section">
   <div class="container">
     <div class="row align-items-center g-5">
-      
+
       <div class="col-lg-5">
         <div class="about-image-wrapper">
           <div class="main-img-box">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop" alt="Learning Together" class="img-fluid">
+            <img src="assets/img/banner/banner_img.avif" alt="Learning Together" class="img-fluid">
           </div>
           <div class="secondary-img-box d-none d-sm-block">
-            <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=400&auto=format&fit=crop" alt="Student Success">
+            <img src="assets/img/about/about2.avif" alt="Student Success">
           </div>
           <div class="experience-pop-card">
             <h4>10k+</h4>
@@ -22,7 +22,7 @@
           <span class="badge-top">About Our Platform</span>
           <h2 class="about-main-title">Innovative Learning Experience <span class="highlight-text">Tailored for Success</span></h2>
           <p class="about-paragraph">We are a next-generation edutech ecosystem dedicated to bridging the gap between top-tier industry practitioners and ambitious learners nationwide. Our structured modules ensure practical, hands-on mastery.</p>
-          
+
           <div class="about-features-grid">
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
@@ -31,7 +31,7 @@
                 <p>Learn directly from professionals running top industries.</p>
               </div>
             </div>
-            
+
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
               <div class="feature-text">
