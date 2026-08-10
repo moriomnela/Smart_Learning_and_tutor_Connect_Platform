@@ -1,4 +1,7 @@
 <?php
+session_start();
+$current_page = basename($_SERVER['PHP_SELF']);
+
 include 'components/template-top.php';
 ?>
 
@@ -52,6 +55,17 @@ include "config/db.php";
 
                     <div class="form-header mb-4">
                         <h2 class="auth-title">Account Login</h2>
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger" style="border-radius: 8px; font-weight: 500;">
+                                <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success" style="border-radius: 8px; font-weight: 500;">
+                                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                            </div>
+                        <?php endif; ?>
                         <p class="auth-subtitle">Don't have an account? <a href="register.php" class="link-trigger">Register Now</a></p>
                     </div>
 

@@ -59,153 +59,215 @@
         }
     }
 
-    /* Ultra Luxury Asymmetric Profile Card Design */
-    .premium-teacher-card {
-        background: $white;
-        border-radius: 24px;
-        padding: 1.25rem;
-        /* Compact outer padding like elite themes */
-        border: 1px solid rgba(14, 42, 71, 0.03);
-        box-shadow: 0 10px 40px rgba(14, 42, 71, 0.01);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+}
+.premium-teacher-card {
+    background: $white;
+    border-radius: 24px;
+    padding: 1.25rem;
+    /* Compact outer padding like elite themes */
+    border: 1px solid rgba(14, 42, 71, 0.03);
+    box-shadow: 0 10px 40px rgba(14, 42, 71, 0.01);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 
-        /* Asymmetric Rectangular Media Frame */
-        .teacher-thumb-box {
-            position: relative;
+    /* Asymmetric Rectangular Media Frame */
+    .teacher-thumb-box {
+        position: relative;
+        width: 100%;
+        height: 280px;
+        border-radius: 18px;
+        overflow: hidden;
+        background-color: #f1f5f9;
+
+        .teacher-img {
             width: 100%;
-            height: 280px;
-            border-radius: 18px;
-            overflow: hidden;
-            background-color: #f1f5f9;
-
-            .teacher-img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* Sleek Floating Info Tag */
-            .courses-badge {
-                position: absolute;
-                bottom: 15px;
-                left: 15px;
-                background: rgba(#0e2a47, 0.75);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                color: $white;
-                font-size: 0.75rem;
-                font-weight: 600;
-                padding: 0.35rem 0.85rem;
-                border-radius: 30px;
-                border: 1px solid rgba($white, 0.1);
-                z-index: 3;
-            }
-
-            /* Smooth Interaction Social Pop Flyout */
-            .social-flyout {
-                position: absolute;
-                top: 15px;
-                right: -50px;
-                /* Hidden outside the border by default */
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                z-index: 5;
-
-                .social-link {
-                    width: 36px;
-                    height: 36px;
-                    background-color: $white;
-                    color: #0e2a47;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 0.85rem;
-                    text-decoration: none;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                    transition: $transition;
-
-                    &:hover {
-                        background-color: #2b6eff;
-                        color: $white;
-                        transform: scale(1.1);
-                    }
-                }
-            }
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .teacher-meta-content {
-            padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+        /* Sleek Floating Info Tag */
+        .courses-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(#0e2a47, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: $white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 30px;
+            border: 1px solid rgba($white, 0.1);
+            z-index: 3;
+        }
+
+        /* Smooth Interaction Social Pop Flyout */
+        .social-flyout {
+            position: absolute;
+            top: 15px;
+            right: -50px;
+            /* Hidden outside the border by default */
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            gap: 8px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5;
 
-            .teacher-name {
-                font-size: 1.35rem;
-                font-weight: 800;
+            .social-link {
+                width: 36px;
+                height: 36px;
+                background-color: $white;
                 color: #0e2a47;
-                margin-bottom: 0.3rem;
-                letter-spacing: -0.02rem;
-            }
-
-            .teacher-subject {
-                font-size: 0.9rem;
-                color: #748494;
-                margin-bottom: 1.5rem;
-                font-weight: 500;
-                flex-grow: 1;
-            }
-
-            /* Clean Action Button Layer */
-            .btn-profile-trigger {
-                display: inline-flex;
+                border-radius: 50%;
+                display: flex;
                 align-items: center;
-                justify-content: space-between;
-                font-family: $font-heading;
-                font-weight: 700;
-                color: #0e2a47;
-                font-size: 0.9rem;
+                justify-content: center;
+                font-size: 0.85rem;
                 text-decoration: none;
-                padding-top: 1rem;
-                border-top: 1px dashed #e2e8f0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                 transition: $transition;
 
-                i {
-                    font-size: 0.9rem;
-                    transition: transform 0.3s ease;
+                &:hover {
+                    background-color: #2b6eff;
+                    color: $white;
+                    transform: scale(1.1);
                 }
             }
         }
+    }
 
-        /* Hover Motion Graphics Engine */
-        &:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(14, 42, 71, 0.06);
-            border-color: rgba(#2b6eff, 0.12);
+    .teacher-meta-content {
+        padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
 
-            .teacher-thumb-box {
-                .teacher-img {
-                    transform: scale(1.06);
-                }
+        .teacher-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0e2a47;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02rem;
+        }
 
-                .social-flyout {
-                    right: 15px;
-                    /* Flies inward cleanly on hover */
-                }
+        .teacher-subject {
+            font-size: 0.9rem;
+            color: #748494;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        /* Clean Action Button Layer */
+        .btn-profile-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: $font-heading;
+            font-weight: 700;
+            color: #0e2a47;
+            font-size: 0.9rem;
+            text-decoration: none;
+            padding-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+            transition: $transition;
+
+            i {
+                font-size: 0.9rem;
+                transition: transform 0.3s ease;
+            }
+        }
+    }
+
+    /* Hover Motion Graphics Engine */
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(14, 42, 71, 0.06);
+        border-color: rgba(#2b6eff, 0.12);
+
+        .teacher-thumb-box {
+            .teacher-img {
+                transform: scale(1.06);
             }
 
-            .teacher-meta-content .btn-profile-trigger {
-                color: #2b6eff;
+            .social-flyout {
+                right: 15px;
+                /* Flies inward cleanly on hover */
+            }
+        }
 
-                i {
-                    transform: translateX(5px);
-                }
+        .teacher-meta-content .btn-profile-trigger {
+            color: #2b6eff;
+
+            i {
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+
+
+// ===================== Find Tutor ==============================
+// _find-tutor.scss
+.find-tutor-section {
+    background-color: $bg-light;
+    
+    .find-tutor-box {
+        background-color: $white;
+        padding: 40px;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow;
+    }
+
+    .section-title {
+        color: $primary;
+        font-family: $font-heading;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .search-form {
+        // Custom styling for inputs and selects
+        .custom-input, .custom-select {
+            height: 55px; // Ektu boro korlam jate click korte easy hoy
+            border: 1px solid rgba($text-muted, 0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: $text-dark;
+            background-color: #fafafa;
+            transition: $transition;
+
+            &:focus {
+                outline: none;
+                background-color: $white;
+                border-color: $primary;
+                box-shadow: 0 0 0 3px rgba($primary, 0.1);
+            }
+        }
+
+        // Custom styling for the search button
+        .search-btn {
+            height: 55px;
+            background-color: $secondary; // Amber color
+            border: none;
+            color: $white; 
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: $transition;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            &:hover {
+                background-color: darken($secondary, 8%);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba($secondary, 0.3);
             }
         }
     }

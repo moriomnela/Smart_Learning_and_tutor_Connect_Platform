@@ -1,3 +1,4 @@
+
 <section class="about-section">
   <div class="container">
     <div class="row align-items-center g-5">
@@ -41,7 +42,7 @@
             </div>
           </div>
 
-          <a href="#" class="about-premium-btn">
+          <a href="about_us.php" class="about-premium-btn">
             <span>Discover More About Us</span>
             <i class="fa-solid fa-arrow-right-long"></i>
           </a>

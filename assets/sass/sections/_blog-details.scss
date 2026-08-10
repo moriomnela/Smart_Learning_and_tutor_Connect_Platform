@@ -1,0 +1,166 @@
+// _blog_details.scss
+.blog-details-section {
+    background-color: $bg-light;
+
+    .line-height-lg {
+        line-height: 1.8;
+    }
+
+    // Single Post Styling
+    .single-post {
+        .post-title {
+            font-family: $font-heading;
+        }
+
+        .custom-blockquote {
+            p {
+                font-size: 1.15rem;
+                color: $primary;
+            }
+        }
+
+        // Tags & Share
+        .custom-tag {
+            background-color: rgba($text-muted, 0.1);
+            color: $text-muted;
+            padding: 8px 15px;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: $transition;
+
+            &:hover {
+                background-color: $primary;
+                color: $white;
+            }
+        }
+
+        .share-icon {
+            width: 35px;
+            height: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba($text-muted, 0.1);
+            color: $text-muted;
+            text-decoration: none;
+            transition: $transition;
+
+            &:hover {
+                color: $white;
+                &.facebook { background-color: #3b5998; }
+                &.twitter { background-color: #1da1f2; }
+                &.linkedin { background-color: #0077b5; }
+            }
+        }
+    }
+
+    // Form Inputs
+    .custom-input {
+        border: 1px solid rgba($text-muted, 0.2);
+        border-radius: 8px;
+        padding: 12px 15px;
+        background-color: #fafafa;
+        transition: $transition;
+
+        &:focus {
+            outline: none;
+            background-color: $white;
+            border-color: $primary;
+            box-shadow: 0 0 0 3px rgba($primary, 0.1);
+        }
+    }
+
+    // Sidebar Widgets
+    .blog-sidebar {
+        .widget-title {
+            font-family: $font-heading;
+            position: relative;
+            padding-bottom: 10px;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 2px;
+                width: 40px;
+                background-color: $secondary;
+            }
+        }
+
+        // Search Widget
+        .search-widget {
+            .search-submit-btn {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                color: $primary;
+                transition: $transition;
+                
+                &:hover {
+                    color: $secondary;
+                }
+            }
+        }
+
+        // Categories List
+        .widget-list {
+            li {
+                border-bottom: 1px dashed rgba($text-muted, 0.2);
+                
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                a {
+                    padding: 12px 0;
+                    color: $text-muted;
+                    text-decoration: none;
+                    transition: $transition;
+                    font-weight: 500;
+
+                    span {
+                        background-color: rgba($primary, 0.1);
+                        color: $primary;
+                        font-size: 0.8rem;
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                    }
+
+                    &:hover {
+                        color: $primary;
+                        padding-left: 5px; // Nice little slide effect
+                    }
+                }
+            }
+        }
+
+        // Recent Posts
+        .recent-post-widget {
+            .post-title-link {
+                transition: $transition;
+                font-weight: 600;
+                line-height: 1.4;
+                
+                &:hover {
+                    color: $primary !important;
+                }
+            }
+        }
+        .badge.custom-tag {
+            background: rgba($secondary, 0.5);
+            color: black;
+            &::before {
+                content: "#";
+            }
+            &:hover {
+                background: rgba($secondary, 1);
+            }
+        }
+    }
+}

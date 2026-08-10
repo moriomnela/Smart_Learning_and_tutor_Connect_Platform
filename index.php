@@ -1,6 +1,7 @@
 <?php
-include 'components/template-top.php';
+$current_page = basename($_SERVER['PHP_SELF']);
 
+include 'components/template-top.php';
 
 include 'components/header.php';
 include 'components/banner.php';
@@ -13,6 +14,5 @@ include 'components/testimonial.php';
 include 'components/faq.php';
 include 'components/instructor-cta.php';
 include 'components/footer.php';
-
 
 include 'components/template-bottom.php';

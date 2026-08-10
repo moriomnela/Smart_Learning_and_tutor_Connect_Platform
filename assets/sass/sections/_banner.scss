@@ -207,3 +207,90 @@
         }
     }
 }
+
+
+// Page Banner
+// _banner.scss
+.page-banner {
+    position: relative;
+    padding: 140px 0 100px; 
+    z-index: 1;
+
+    // CSS Background without image
+    .banner-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // Primary color theke ektu deep shade e gradient
+        background: linear-gradient(135deg, $primary 0%, #0b1940 100%);
+        z-index: -1;
+    }
+
+    // Text ke background er upore anar jonno
+    .relative-z {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .banner-title {
+        color: $white;
+        font-family: $font-heading;
+        font-size: 3rem; 
+        font-weight: 700;
+        text-shadow: 0 4px 6px rgba($text-dark, 0.2); 
+        margin-bottom: 1rem;
+        text-transform: capitalize;
+    }
+
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+        margin: 0;
+
+        .breadcrumb-item {
+            font-size: 1.1rem;
+            
+            a {
+                color: $secondary;
+                font-weight: 500;
+                
+                &:hover {
+                    color: $white;
+                }
+            }
+
+            &.active {
+                color: rgba($white, 0.8); 
+            }
+
+            &::before {
+                color: rgba($white, 0.6); 
+            }
+        }
+    }
+
+    // SVG Wave Styling
+    .custom-shape-divider-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+        
+        svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+            transform: scaleY(-1);
+        }
+        
+        .shape-fill {
+            fill: $bg-light; // Reset SCSS er body background er sathe map kora
+        }
+    }
+}

@@ -1,0 +1,43 @@
+// _dashboard.scss
+.dashboard-wrapper {
+    background-color: $bg-light;
+    min-height: 100vh;
+
+    // Sidebar Styling
+    .dashboard-sidebar {
+        background-color: $white;
+        border-right: 1px solid rgba($text-muted, 0.1);
+        
+        .nav-link {
+            font-weight: 500;
+            color: $text-muted;  
+            transition: $transition;
+            
+            &:hover {
+                background-color: rgba($primary, 0.05);
+                color: $primary !important;
+                padding-left: 15px !important;
+            }
+
+            &.active {
+                background-color: rgba($primary, 0.1);
+                color: $primary !important;
+            }
+        }
+    }
+
+    // Dashboard Cards and General Layout
+    .dashboard-content {
+        .stat-item-card {
+            background-color: $white;
+            border-radius: $border-radius;
+            box-shadow: $box-shadow;
+            border: 1px solid rgba($text-muted, 0.1);
+            transition: $transition;
+
+            &:hover {
+                transform: translateY(-3px);
+            }
+        }
+    }
+}

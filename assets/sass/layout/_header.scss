@@ -4,16 +4,14 @@
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(100, 116, 139, 0.1);
     transition: all 0.3s ease-in-out;
-    position: fixed;
-    left: 0;
-    right: 0;
+    position: sticky;
     top: 0;
 
-  .navbar {
+  .navbar {  
     padding: 1rem 0;
   }
 
-  .logo {
+  .logo {  
     font-family: $font-heading;
     font-size: 2rem;
     font-weight: 800;
@@ -21,9 +19,10 @@
     letter-spacing: -0.05rem;
 
     span {
+      text-shadow: -2px 0px 2px white;
       color: #F59E0B;
       margin-left: -9px;
-    }
+    }   
   }
 
   .nav-list {

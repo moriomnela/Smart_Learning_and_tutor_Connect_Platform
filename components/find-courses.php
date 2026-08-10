@@ -1,9 +1,11 @@
+
+
 <section class="find-courses">
   <div class="find-courses__container">
     
     <!-- Section Header -->
     <div class="find-courses__header">
-      <h2 class="find-courses__title">Explore Our Top Courses</h2>
+      <h1 class="find-courses__title">Explore Our Top Courses</h1>
       <p class="subtitle">Find the right course to boost your skills and advance your career.</p>
     </div>
 
@@ -34,10 +36,10 @@
     <!-- Course Grid -->
     <div class="find-courses__grid">
       
-      <!-- Course Card 1 -->
+   <!-- Course Card 1: Web Development -->
       <article class="course-card">
         <div class="course-card__badge">Bestseller</div>
-        <img src="https://via.placeholder.com/400x250" alt="Course Thumbnail" class="course-card__img">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Web Development Coding Workspace" class="course-card__img">
         <div class="course-card__body">
           <span class="course-card__category">Web Development</span>
           <h3 class="course-card__title">Full-Stack Modern Web Development</h3>
@@ -50,10 +52,10 @@
         </div>
       </article>
 
-      <!-- Course Card 2 -->
+      <!-- Course Card 2: Data Science -->
       <article class="course-card">
         <div class="course-card__badge">Featured</div>
-        <img src="https://via.placeholder.com/400x250" alt="Course Thumbnail" class="course-card__img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Data Science Analytics Dashboard" class="course-card__img">
         <div class="course-card__body">
           <span class="course-card__category">Data Science</span>
           <h3 class="course-card__title">Python for Data Science & Machine Learning</h3>
@@ -66,9 +68,9 @@
         </div>
       </article>
 
-      <!-- Course Card 3 -->
+      <!-- Course Card 3: UI/UX Design -->
       <article class="course-card">
-        <img src="https://via.placeholder.com/400x250" alt="Course Thumbnail" class="course-card__img">
+        <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop" alt="UI/UX Design Concept and Sketching" class="course-card__img">
         <div class="course-card__body">
           <span class="course-card__category">UI/UX Design</span>
           <h3 class="course-card__title">UI/UX Design Fundamentals with Figma</h3>

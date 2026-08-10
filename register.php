@@ -1,8 +1,8 @@
 <?php
+session_start();
 include 'components/template-top.php';
-?>
-<?php
 include "config/db.php";
+
 ?>
 
 
@@ -50,6 +50,18 @@ include "config/db.php";
 
                     <div class="form-header mb-4">
                         <h2 class="auth-title">Create Account</h2>
+                        <!-- Error and Success Messages -->
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger" style="border-radius: 8px; font-weight: 500;">
+                                <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success" style="border-radius: 8px; font-weight: 500;">
+                                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                            </div>
+                        <?php endif; ?>
                         <p class="auth-subtitle">Already have an account? <a href="login.php" class="link-trigger">Login Here</a></p>
                     </div>
 
