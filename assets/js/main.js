@@ -130,6 +130,26 @@
     initTestimonialSwiper()
   }
 
+  // Video Popup
+$(document).ready(function () {
+  $(".popup-youtube").magnificPopup({
+    type: "iframe",
+    mainClass: "mfp-fade",
+    removalDelay: 160,
+    preloader: false,
+    fixedContentPos: true, // Prevents background scrolling and handles overflow smoothly
+    callbacks: {
+      open: function () {
+        $("body").css("overflow", "hidden");
+      },
+      close: function () {
+        $("body").css("overflow", "auto");
+      },
+    },
+  });
+});
+
+
   /* Core Event Loader Trigger */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAllSliders);

@@ -2,40 +2,54 @@
 session_start();
 require_once '../config/db.php';
 
-// Security check: only admins
+// Security check: only admin can approve
 if (!isset($_SESSION['is_logged_in']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login.php");
     exit;
 }
 
 if (isset($_GET['id']) && isset($_GET['user_id'])) {
-    $app_id = $_GET['id'];
-    $user_id = $_GET['user_id'];
+    $app_id = intval($_GET['id']);
+    $user_id = intval($_GET['user_id']);
 
     try {
-        // Begin transaction to ensure both updates happen together
         $pdo->beginTransaction();
 
-        // 1. Update application status to approved
-        $updateApp = $pdo->prepare("UPDATE tutor_applications SET status = 'approved' WHERE id = ?");
-        $updateApp->execute([$app_id]);
+        // 1. Fetch application details
+        $stmt = $pdo->prepare("SELECT * FROM tutor_applications WHERE id = ?");
+        $stmt->execute([$app_id]);
+        $app = $stmt->fetch();
 
-        // 2. Update user role to tutor in users table
-        $updateUser = $pdo->prepare("UPDATE users SET role = 'tutor' WHERE id = ?");
-        $updateUser->execute([$user_id]);
+        if ($app) {
+            // 2. Update user role and profile details (Mapping tutor_applications 'experience' to users table 'bio')
+            $updateUser = $pdo->prepare("UPDATE users SET role = 'tutor', headline = ?, hourly_rate = ?, location = ?, languages = ?, study_mode = ?, bio = ? WHERE id = ?");
+            $updateUser->execute([
+                $app['headline'] ?? '',
+                $app['hourly_rate'] ?? 0,
+                $app['location'] ?? '',
+                $app['languages'] ?? '',
+                $app['study_mode'] ?? '',
+                $app['experience'] ?? '', // Ekhane application er experience ta user er bio/experience hishebe jacche
+                $user_id
+            ]);
 
-        $pdo->commit();
+            // 3. Update application status to approved
+            $updateApp = $pdo->prepare("UPDATE tutor_applications SET status = 'approved' WHERE id = ?");
+            $updateApp->execute([$app_id]);
 
-        $_SESSION['success'] = "Tutor application approved successfully!";
-        header("Location: ../admin/applications.php");
+            $pdo->commit();
+            $_SESSION['success'] = "Teacher application approved successfully!";
+        } else {
+            $_SESSION['error'] = "Application not found.";
+        }
+
+        header("Location: ../admin/dashboard.php");
         exit;
 
-    } catch (Exception $e) {
+    } catch (PDOException $e) {
         $pdo->rollBack();
-        error_log("Approval Error: " . $e->getMessage());
-        $_SESSION['error'] = "Failed to approve application.";
-        header("Location: ../admin/applications.php");
-        exit;
+        // Temporary debug print to see if any other column gives error
+        die("Database Error: " . $e->getMessage());
     }
 } else {
     header("Location: ../admin/dashboard.php");

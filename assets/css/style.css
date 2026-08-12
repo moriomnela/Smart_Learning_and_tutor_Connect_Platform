@@ -28,7 +28,7 @@ body {
   line-height: 1.6;
 }
 
-/* Responsive Images/SVGs */
+/* Responsive img/SVGs */
 img,
 svg {
   max-width: 100%;
@@ -159,6 +159,16 @@ h6 {
   background-color: #F59E0B;
   transition: all 0.3s ease-in-out;
 }
+.main-header .nav-actions {
+  /* Cart icon circular border styling */
+  /* Fix dropdown arrow offset if needed */
+}
+.main-header .nav-actions .x-small {
+  font-size: 0.75rem;
+}
+.main-header .nav-actions .dropdown-toggle::after {
+  display: none;
+}
 .main-header .nav-actions .btn-signin {
   font-family: "Inter", sans-serif;
   font-weight: 600;
@@ -182,6 +192,35 @@ h6 {
   background-color: rgb(206.7275590551, 133.0173228346, 8.4724409449);
   transform: translateY(-2px);
   color: #0F172A;
+}
+.main-header .nav-actions .user-avatar-link {
+  transition: all 0.3s ease;
+}
+.main-header .nav-actions .user-avatar-link img {
+  border: 2px solid var(--primary-color);
+  transition: transform 0.3s ease;
+}
+.main-header .nav-actions .user-avatar-link img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.main-header .nav-actions .cart-icon-circle {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  overflow: hidden;
+}
+.main-header .nav-actions .cart-icon-circle:hover {
+  border-color: var(--primary-color, #1e3a8a);
+  color: var(--primary-color, #1e3a8a);
+  background-color: #f8fafc;
+}
+.main-header .nav-actions .dropdown-toggle::after {
+  margin-left: 0.5em;
 }
 @media (max-width: 768px) {
   .main-header .nav-list {

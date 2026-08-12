@@ -1,6 +1,9 @@
 <?php
 session_start();
 $current_page = basename($_SERVER['PHP_SELF']);
+if (isset($user['role'])) {
+    $_SESSION['avatar'] = $user['avatar'];
+}
 
 include 'components/template-top.php';
 ?>

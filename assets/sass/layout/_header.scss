@@ -57,6 +57,8 @@
   }
 
   .nav-actions {
+    .x-small { font-size: 0.75rem; }
+    .dropdown-toggle::after { display: none; }
     .btn-signin {
       font-family: $font-heading;
       font-weight: 600;
@@ -77,13 +79,49 @@
       border-radius: $border-radius;
       box-shadow: $box-shadow;
       transition: $transition;
-
+  
       &:hover {
         background-color: darken($secondary, 8%);
         transform: translateY(-2px);
         color: $text-dark;
       }
     }
+    .user-avatar-link {
+        transition: all 0.3s ease;
+        
+        img {
+            border: 2px solid var(--primary-color); // Theme color onujayi
+            transition: transform 0.3s ease;
+            
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            }
+        }
+    }
+    /* Cart icon circular border styling */
+    .cart-icon-circle {
+        width: 45px;
+        height: 45px;
+        border: 2px solid #e2e8f0;
+        border-radius: 50%;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        overflow: hidden;
+
+        &:hover {
+            border-color: var(--primary-color, #1e3a8a);
+            color: var(--primary-color, #1e3a8a);
+            background-color: #f8fafc;
+        }
+    }
+
+    /* Fix dropdown arrow offset if needed */
+    .dropdown-toggle::after {
+        margin-left: 0.5em;
+    }
+
   }
 
   /* Mobile and tablet responsive adjustment styles */

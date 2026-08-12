@@ -1,25 +1,24 @@
 /* 1. Configuration and Variables */
 @import 'abstract/variables';
 @import 'abstract/mixins';
-
 /* 2. Base Document Reset and Typography */
 @import 'base/reset';
 @import 'base/typography';
 
 /* 3. Layout and Section Components */
 @import 'layout/header';
-@import 'sections/banner';
+@import 'sections/banner';  
 @import 'sections/about';
 @import 'sections/how-it-works';
 @import 'sections/categories';
 @import 'sections/courses';
-@import 'sections/popular-teachers';
+@import 'sections/popular-teachers';  
 @import 'sections/testimonial';
 @import 'sections/faq';
 @import 'sections/blog';
 @import 'sections/instructor-cta';
 @import 'sections/course-details';
-@import 'sections/tutor-details';
+@import 'sections/tutor-details';    
 @import 'sections/blog-details';
 @import 'sections/contact_us';
 @import 'sections/auth';

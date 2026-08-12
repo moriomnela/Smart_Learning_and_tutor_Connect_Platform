@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once '../config/db.php'; 
 
 // Security Check: If not logged in or not a student, redirect to login
 if (!isset($_SESSION['is_logged_in']) || $_SESSION['role'] !== 'student') {
@@ -8,8 +8,14 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['role'] !== 'student') {
     exit;
 }
 
-$page_title = "Student Dashboard";
-// Note: Path adjust kore nish jodi template components baire thake
+$stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$currentUser = $stmt->fetch();
+
+$appStmt = $pdo->prepare("SELECT status FROM tutor_applications WHERE user_id = ? ORDER BY id DESC LIMIT 1");
+$appStmt->execute([$_SESSION['user_id']]);
+$latestApp = $appStmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +45,21 @@ $page_title = "Student Dashboard";
             <li><a href="bookings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-calendar-check me-2"></i> Tutor Bookings</a></li>
             <li><a href="profile.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user me-2"></i> Profile Settings</a></li>
             <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
-            <li><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
+            <?php if ($currentUser['role'] === 'student'): ?>
+                <?php if (!$latestApp): ?>
+                    <!-- No application yet: Show Apply Link -->
+                    <li><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
+                <?php elseif ($latestApp['status'] === 'pending'): ?>
+                    <!-- Application is under review -->
+                    <li><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
+                <?php elseif ($latestApp['status'] === 'rejected'): ?>
+                    <!-- If rejected, allow them to apply again -->
+                    <li><a href="become-teacher.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-rotate-right me-2"></i> Re-apply as Teacher</a></li>
+                <?php endif; ?>
+            <?php else: ?>
+                <!-- Already a tutor or admin -->
+                <li><span class="nav-link p-2 rounded text-primary fw-bold"><i class="fa-solid fa-check-circle me-2"></i> Faculty Member</span></li>
+            <?php endif; ?>
         </ul>
     </div>
 
