@@ -67,6 +67,15 @@ if ($tutor_avatar !== 'default-avatar.png' && !str_starts_with($tutor_avatar, 'a
     $tutor_img_path = ($tutor_avatar === 'default-avatar.png') ? 'assets/img/profiles/default-avatar.png' : $tutor_avatar;
 }
 
+// Fetch chapters and quizzes for this course
+    $chapters = $pdo->prepare("SELECT * FROM course_chapters WHERE course_id = ?"); 
+    $chapters->execute([$course_id]); 
+    $chapters = $chapters->fetchAll();
+
+    $quizzes = $pdo->prepare("SELECT * FROM course_quizzes WHERE course_id = ?"); 
+    $quizzes->execute([$course_id]); 
+    $quizzes = $quizzes->fetchAll();
+
 $page_title = $course['title'];
 ?>
 
@@ -227,25 +236,53 @@ $page_title = $course['title'];
                         <!-- TAB 3: QUIZZES -->
                         <div class="tab-pane fade" id="tab-quizzes">
                             <h5 class="fw-bold mb-3">Course Quizzes & Assessments</h5>
-                            <?php if (!empty($quizzes)): ?>
+                            <?php if (!empty($chapters)): ?>
                                 <?php if ($is_enrolled || (isset($_SESSION['role']) && in_array($_SESSION['role'], ['admin', 'tutor']))): ?>
-                                    <div class="accordion" id="quizAccordion">
-                                        <?php foreach ($quizzes as $qi => $q): ?>
-                                            <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
-                                                <h2 class="accordion-header" id="headingQ<?php echo $qi; ?>">
-                                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQ<?php echo $qi; ?>">
-                                                        Q<?php echo ($qi + 1) . ': ' . htmlspecialchars($q['question']); ?>
+                                    <div class="accordion" id="chapterQuizAccordion">
+                                        <?php foreach ($chapters as $index => $c): ?>
+                                            <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+                                                <h2 class="accordion-header" id="headingChap<?php echo $c['id']; ?>">
+                                                    <button class="accordion-button <?php echo $index !== 0 ? 'collapsed' : ''; ?> fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChap<?php echo $c['id']; ?>" aria-expanded="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-controls="collapseChap<?php echo $c['id']; ?>">
+                                                        <i class="fa-solid fa-book-open me-2 text-primary"></i> <?php echo htmlspecialchars($c['chapter_name']); ?>
                                                     </button>
                                                 </h2>
-                                                <div id="collapseQ<?php echo $qi; ?>" class="accordion-collapse collapse" data-bs-parent="#quizAccordion">
+                                                <div id="collapseChap<?php echo $c['id']; ?>" class="accordion-collapse collapse <?php echo $index === 0 ? 'show' : ''; ?>" aria-labelledby="headingChap<?php echo $c['id']; ?>" data-bs-parent="#chapterQuizAccordion">
                                                     <div class="accordion-body bg-light">
-                                                        <ul class="list-unstyled mb-2">
-                                                            <li>A. <?php echo htmlspecialchars($q['option_a']); ?></li>
-                                                            <li>B. <?php echo htmlspecialchars($q['option_b']); ?></li>
-                                                            <li>C. <?php echo htmlspecialchars($q['option_c']); ?></li>
-                                                            <li>D. <?php echo htmlspecialchars($q['option_d']); ?></li>
-                                                        </ul>
-                                                        <span class="badge bg-success">Correct Option: <?php echo strtoupper($q['correct_option']); ?></span>
+                                                        <?php 
+                                                            $q_in_chapter = [];
+                                                            foreach($quizzes as $q) {
+                                                                if(isset($q['chapter_id']) && $q['chapter_id'] == $c['id']) {
+                                                                    $q_in_chapter[] = $q;
+                                                                }
+                                                            }
+                                                        ?>
+
+                                                        <?php if (!empty($q_in_chapter)): ?>
+                                                            <div class="accordion" id="innerQuizAccordion<?php echo $c['id']; ?>">
+                                                                <?php foreach ($q_in_chapter as $qi => $q): ?>
+                                                                    <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+                                                                        <h2 class="accordion-header" id="headingQ<?php echo $c['id'] . '_' . $qi; ?>">
+                                                                            <button class="accordion-button collapsed fw-bold small" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQ<?php echo $c['id'] . '_' . $qi; ?>">
+                                                                                Q<?php echo ($qi + 1) . ': ' . htmlspecialchars($q['question']); ?>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseQ<?php echo $c['id'] . '_' . $qi; ?>" class="accordion-collapse collapse" data-bs-parent="#innerQuizAccordion<?php echo $c['id']; ?>">
+                                                                            <div class="accordion-body bg-white">
+                                                                                <ul class="list-unstyled mb-2 small">
+                                                                                    <li><strong>A.</strong> <?php echo htmlspecialchars($q['option_a']); ?></li>
+                                                                                    <li><strong>B.</strong> <?php echo htmlspecialchars($q['option_b']); ?></li>
+                                                                                    <li><strong>C.</strong> <?php echo htmlspecialchars($q['option_c']); ?></li>
+                                                                                    <li><strong>D.</strong> <?php echo htmlspecialchars($q['option_d']); ?></li>
+                                                                                </ul>
+                                                                                <span class="badge bg-success">Correct Option: <?php echo strtoupper($q['correct_option']); ?></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        <?php else: ?>
+                                                            <p class="text-muted small mb-0 text-center py-2">No quizzes available in this chapter yet.</p>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,7 +292,7 @@ $page_title = $course['title'];
                                     <div class="alert alert-warning mb-0"><i class="fa-solid fa-lock me-2"></i> Enroll in this course to take quizzes and check your answers.</div>
                                 <?php endif; ?>
                             <?php else: ?>
-                                <p class="text-muted mb-0">No quizzes available for this course yet.</p>
+                                <p class="text-muted mb-0">No chapters or quizzes available for this course yet.</p>
                             <?php endif; ?>
                         </div>
 

@@ -51,12 +51,22 @@ if (isset($_SESSION['is_logged_in']) && isset($_SESSION['user_id'])) {
         </ul>
 
         <!-- User Authentication Actions -->
-        <div class="nav-actions d-flex align-items-center gap-1">
+        <div class="nav-actions d-flex align-items-center gap-3">
+            
+            <!-- Cart Icon (Always Visible for everyone) -->
+            <a href="<?php echo $path_prefix; ?>cart.php" class="cart-icon-circle overflow-visible position-relative d-flex align-items-center justify-content-center text-dark text-decoration-none" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-cart-shopping fs-5"></i>
+                <?php if(isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
+                        <?php echo count($_SESSION['cart']); ?>
+                    </span>
+                <?php endif; ?>
+            </a>
+
             <?php if (isset($_SESSION['is_logged_in'])): ?>
                 <?php 
                     $avatar_path = $_SESSION['avatar'] ?? 'default-avatar.png';
                     
-                    // Determine correct image source based on whether it's custom uploaded or default
                     if ($avatar_path === 'default-avatar.png' || empty($avatar_path)) {
                         $avatar_img = $path_prefix . 'assets/img/profiles/default-avatar.png';
                     } elseif (str_starts_with($avatar_path, 'assets/')) {
@@ -66,7 +76,7 @@ if (isset($_SESSION['is_logged_in']) && isset($_SESSION['user_id'])) {
                     }
                 ?>
                 <!-- User Info + Avatar Dropdown -->
-                <div class="dropdown me-5">
+                <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="cart-icon-circle me-2">
                             <img src="<?php echo htmlspecialchars($avatar_img); ?>" 
@@ -84,18 +94,8 @@ if (isset($_SESSION['is_logged_in']) && isset($_SESSION['user_id'])) {
                     </ul>
                 </div>
 
-                <!-- Cart Icon -->
-                <a href="<?php echo $path_prefix; ?>cart.php" class="cart-icon-circle position-relative d-flex align-items-center justify-content-center text-dark">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">
-                            <?php echo count($_SESSION['cart']); ?>
-                        </span>
-                    <?php endif; ?>
-                </a>
-
             <?php else: ?>
-                <a href="<?php echo $path_prefix; ?>login.php" class="btn-signin me-3">Sign In</a>
+                <a href="<?php echo $path_prefix; ?>login.php" class="btn-signin me-2">Sign In</a>
                 <a href="<?php echo $path_prefix; ?>register.php" class="btn-cta">Get Started</a>
             <?php endif; ?>
         </div>
