@@ -105,7 +105,7 @@ $page_title = "Student Dashboard";
 
 <div class="dashboard-wrapper d-flex">
     <!-- Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px;height: 100vh;position: sticky;top: 0;overflow: auto;scrollbar-width: thin;scrollbar-color: transparent transparent;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Student</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="dashboard.php" class="nav-link active p-2 rounded fw-bold text-primary bg-light"><i class="fa-solid fa-house me-2"></i> Dashboard</a></li>
@@ -125,9 +125,9 @@ $page_title = "Student Dashboard";
                 <?php if (!$latestApp): ?>
                     <li class="mt-4"><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
                 <?php elseif ($latestApp['status'] === 'pending'): ?>
-                    <li><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
+                    <li class="mt-4"><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
                 <?php elseif ($latestApp['status'] === 'rejected'): ?>
-                    <li><a href="become-teacher.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-rotate-right me-2"></i> Re-apply as Teacher</a></li>
+                    <li class="mt-4"><a href="become-teacher.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-rotate-right me-2"></i> Re-apply as Teacher</a></li>
                 <?php endif; ?>
             <?php else: ?>
                 <li><span class="nav-link p-2 rounded text-primary fw-bold"><i class="fa-solid fa-check-circle me-2"></i> Faculty Member</span></li>

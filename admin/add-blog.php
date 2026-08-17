@@ -70,14 +70,30 @@ $page_title = "Admin - Add Blog";
 
 <div class="dashboard-wrapper d-flex">
     <!-- Admin Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px;height: 100vh;position: sticky;top: 0;overflow: auto;scrollbar-width: thin;scrollbar-color: transparent transparent;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Admin</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chart-line me-2"></i> Overview</a></li>
+            <li><a href="site-stat.php" class="nav-link p-2 rounded text-black"><i class="fa-solid fa-chart-pie me-2"></i> Site Statistics</a></li>
+            <li><a href="applications.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chalkboard-user me-2"></i> Teacher Applications</a></li>
+            <li><a href="manage-teachers.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user-tie me-2"></i> Manage Teachers</a></li>
+            <li><a href="manage-courses.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open me-2"></i> Manage Courses</a></li>
             <li><a href="withdrawals.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-money-bill-transfer me-2"></i> Withdrawals</a></li>
-            <li><a href="add-blog.php" class="nav-link active fw-bold text-primary bg-light p-2 rounded"><i class="fa-solid fa-pen-nib me-2"></i> Write Blog</a></li>
+            <li><a href="earning.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-wallet me-2"></i> Admin Earnings</a></li>
+            <li><a href="manage-students.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user-graduate me-2"></i> Manage Students</a></li>
+            <li><a href="add-blog.php" class="nav-link active p-2 rounded fw-bold text-primary bg-light"><i class="fa-solid fa-pen-nib me-2"></i> Write Blog</a></li>
             <li><a href="manage-blogs.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open-reader me-2"></i> Manage Blogs</a></li>
-            <li><a href="contacts.php" class="nav-link p-2 rounded text-black"><i class="fa-solid fa-envelope-open-text me-2"></i> Messages</a></li>            
+            <li><a href="contacts.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-envelope-open-text me-2"></i> Messages</a></li>
+            <li><a href="profile.php" class="nav-link text-dark p-2 rounded"><i class="fa-solid fa-user-gear me-2"></i>Profile Settings</a></li>
+            <li><a href="../tutor.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-chalkboard-user me-2"></i> Browse Tutors</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>
+
+            <li><a href="../courses.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-book-bookmark me-2"></i> Browse Courses</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>            
             <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
         </ul>
     </div>
