@@ -12,14 +12,14 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['role'] !== 'student') {
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 
-// Fetch User Data Safely
-$current_user = [];
+// Fetch User Data Safely ($currentUser variable used consistently)
+$currentUser = [];
 try {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->execute([$user_id]);
-    $current_user = $stmt->fetch() ?: [];
+    $currentUser = $stmt->fetch() ?: [];
 } catch (PDOException $e) {
-    $current_user = [];
+    $currentUser = [];
 }
 
 // Check latest tutor application status for sidebar
@@ -31,7 +31,7 @@ $latestApp = $appStmt->fetch();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     $full_name = trim($_POST['full_name']);
     $email = trim($_POST['email']);
-    $avatar = $current_user['avatar'] ?? 'default-avatar.png';
+    $avatar = $currentUser['avatar'] ?? 'default-avatar.png';
 
     // Avatar Upload Handling
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
         }
         
         if (move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
-            // Store relative path or just file name based on your setup, here storing full relative path
             $avatar = 'assets/img/profiles/' . $file_name;
         }
     }
@@ -103,27 +102,37 @@ $page_title = "Profile Settings";
 <body class="bg-light">
 
 <div class="dashboard-wrapper d-flex">
-    <!-- Student Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; min-height: 100vh;">
+    <!-- Sidebar -->
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Student</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
-            <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a></li>
-            <li><a href="tutors.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chalkboard-user me-2"></i> Browse Tutors</a></li>
-            <li><a href="my-courses.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open me-2"></i> Enrolled Courses</a></li>
-            <li><a href="bookings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-calendar-check me-2"></i> My Bookings</a></li>
+            <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-house me-2"></i> Dashboard</a></li>
+            <li><a href="my-courses.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open me-2"></i> My Courses</a></li>
+            <li><a href="bookings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-calendar-check me-2"></i> Tutor Bookings</a></li>
             <li><a href="profile.php" class="nav-link active p-2 rounded fw-bold text-primary bg-light"><i class="fa-solid fa-user-gear me-2"></i> Profile Settings</a></li>
-            <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+            <li><a href="../tutor.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-chalkboard-user me-2"></i> Browse Tutors</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>
 
-            <!-- Become a Teacher Logic -->
-            <?php if (isset($current_user['role']) && $current_user['role'] === 'student'): ?>
+            <li><a href="../courses.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-book-bookmark me-2"></i> Browse Courses</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>
+            
+            <?php if (isset($currentUser['role']) && $currentUser['role'] === 'student'): ?>
                 <?php if (!$latestApp): ?>
-                    <li class="mt-2"><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
+                    <li class="mt-4"><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
                 <?php elseif ($latestApp['status'] === 'pending'): ?>
-                    <li class="mt-2"><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
+                    <li><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
                 <?php elseif ($latestApp['status'] === 'rejected'): ?>
-                    <li class="mt-2"><a href="become-teacher.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-rotate-right me-2"></i> Re-apply as Teacher</a></li>
+                    <li><a href="become-teacher.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-rotate-right me-2"></i> Re-apply as Teacher</a></li>
                 <?php endif; ?>
+            <?php else: ?>
+                <li><span class="nav-link p-2 rounded text-primary fw-bold"><i class="fa-solid fa-check-circle me-2"></i> Faculty Member</span></li>
             <?php endif; ?>
+            
+            <li><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
         </ul>
     </div>
 
@@ -156,10 +165,9 @@ $page_title = "Profile Settings";
                         <!-- Avatar Preview -->
                         <div class="mb-4 d-flex align-items-center gap-3">
                             <div style="width: 70px; height: 70px; border-radius: 50%; overflow: hidden; background: #e9ecef;" class="d-flex align-items-center justify-content-center border">
-                                <?php if (!empty($current_user['avatar']) && $current_user['avatar'] !== 'default-avatar.png'): ?>
-                                    <img src="../<?php echo htmlspecialchars($current_user['avatar']); ?>" alt="Avatar" class="w-100 h-100 object-fit-cover">
+                                <?php if (!empty($currentUser['avatar']) && $currentUser['avatar'] !== 'default-avatar.png'): ?>
+                                    <img src="../<?php echo htmlspecialchars($currentUser['avatar']); ?>" alt="Avatar" class="w-100 h-100 object-fit-cover">
                                 <?php else: ?>
-                                    <!-- Fallback or show default avatar from assets -->
                                     <img src="../assets/img/profiles/default-avatar.png" alt="Default Avatar" class="w-100 h-100 object-fit-cover" onerror="this.style.display='none'">
                                     <i class="fa-solid fa-user fs-3 text-secondary position-absolute"></i>
                                 <?php endif; ?>
@@ -172,11 +180,11 @@ $page_title = "Profile Settings";
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Full Name</label>
-                            <input type="text" name="full_name" class="form-control py-2" value="<?php echo htmlspecialchars($current_user['full_name'] ?? ''); ?>" required>
+                            <input type="text" name="full_name" class="form-control py-2" value="<?php echo htmlspecialchars($currentUser['full_name'] ?? ''); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Email Address</label>
-                            <input type="email" name="email" class="form-control py-2" value="<?php echo htmlspecialchars($current_user['email'] ?? ''); ?>" required>
+                            <input type="email" name="email" class="form-control py-2" value="<?php echo htmlspecialchars($currentUser['email'] ?? ''); ?>" required>
                         </div>
 
                         <div class="mt-4">

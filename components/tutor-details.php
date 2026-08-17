@@ -35,7 +35,7 @@ $page_title = htmlspecialchars($tutor['full_name']) . " - Tutor Profile";
 <section class="tutor-profile-section pb-5">
     
     <!-- Tutor Cover Area -->
-    <div class="tutor-cover-bg" style="background-image: url('https://dummyimage.com/1920x400/1e3a8a/ffffff.jpg&text=Tutor+Cover'); height: 300px; background-size: cover; background-position: center;">
+    <div class="tutor-cover-bg" style="background-image: url('assets/img/banner/tutor-details-bg.jpg'); height: 300px; background-size: cover; background-position: center;">
     </div>
 
     <div class="container" style="margin-top: -100px;">
@@ -183,7 +183,6 @@ $page_title = htmlspecialchars($tutor['full_name']) . " - Tutor Profile";
                             
                             <button type="button" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 text-white" data-bs-toggle="modal" data-bs-target="#bookingModal">Book a Lesson</button>
                         </form>
-                        <a href="mailto:<?php echo htmlspecialchars($tutor['email']); ?>" class="btn btn-outline-primary w-100 py-3 fw-bold rounded-3 text-decoration-none text-center"><i class="fa-regular fa-envelope me-2"></i> Send Message</a>
                     </div>
 
                     <div class="availability-box bg-light p-3 rounded-3 text-center">

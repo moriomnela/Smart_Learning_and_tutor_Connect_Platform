@@ -7,7 +7,7 @@
                 <p class="hero-desc">Connect with certified, high-quality tutors and step up your skills with live interactive courses tailored just for you.</p>
 
                 <div class="hero-buttons d-flex align-items-center">
-                    <a href="tutors.php" class="btn btn-primary-custom me-3">Find a Tutor</a>
+                    <a href="tutor.php" class="btn btn-primary-custom me-3">Find a Tutor</a>
                     <a href="courses.php" class="btn btn-outline-custom">Explore Courses</a>
                 </div>
 

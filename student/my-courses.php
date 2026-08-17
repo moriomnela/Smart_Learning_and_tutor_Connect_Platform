@@ -56,17 +56,26 @@ $page_title = "My Enrolled Courses";
 
 <div class="dashboard-wrapper d-flex">
     <!-- Student Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; min-height: 100vh;">
+    <!-- Sidebar -->
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Student</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
-            <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-house me-2"></i> Dashboard</a></li>
-            <li><a href="my-courses.php" class="nav-link active fw-bold text-primary bg-light p-2 rounded"><i class="fa-solid fa-book-open me-2"></i> My Courses</a></li>
+            <li><a href="dashboard.php" class="nav-link p-2 text-dark"><i class="fa-solid fa-house me-2"></i> Dashboard</a></li>
+            <li><a href="my-courses.php" class="nav-link active p-2 rounded fw-bold text-primary bg-light"><i class="fa-solid fa-book-open me-2"></i> My Courses</a></li>
             <li><a href="bookings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-calendar-check me-2"></i> Tutor Bookings</a></li>
-            <li><a href="profile.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user me-2"></i> Profile Settings</a></li>
-            <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+            <li><a href="profile.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user-gear me-2"></i> Profile Settings</a></li>
+            <li><a href="../tutor.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-chalkboard-user me-2"></i> Browse Tutors</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>
+
+            <li><a href="../courses.php" target="_blank" class="nav-link p-2 rounded text-dark d-flex justify-content-between align-items-center">
+                <span><i class="fa-solid fa-book-bookmark me-2"></i> Browse Courses</span> 
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+            </a></li>
             <?php if ($currentUser['role'] === 'student'): ?>
                 <?php if (!$latestApp): ?>
-                    <li><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
+                    <li class="mt-4"><a href="become-teacher.php" class="nav-link p-2 rounded text-success fw-bold"><i class="fa-solid fa-chalkboard-user me-2"></i> Become a Teacher</a></li>
                 <?php elseif ($latestApp['status'] === 'pending'): ?>
                     <li><span class="nav-link p-2 rounded text-warning fw-bold"><i class="fa-solid fa-clock me-2"></i> Application Pending</span></li>
                 <?php elseif ($latestApp['status'] === 'rejected'): ?>
@@ -75,6 +84,8 @@ $page_title = "My Enrolled Courses";
             <?php else: ?>
                 <li><span class="nav-link p-2 rounded text-primary fw-bold"><i class="fa-solid fa-check-circle me-2"></i> Faculty Member</span></li>
             <?php endif; ?>
+            <li><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+            
         </ul>
     </div>
 
@@ -117,7 +128,7 @@ $page_title = "My Enrolled Courses";
 
                         $progress_percent = ($total_lessons > 0) ? round(($completed_lessons / $total_lessons) * 100) : 0;
                     ?>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="card border-0 shadow-sm rounded-4 h-100 bg-white overflow-hidden">
                             <img src="../assets/img/courses/<?php echo htmlspecialchars($course['image']); ?>" alt="Course Thumbnail" class="card-img-top" style="height: 180px; object-fit: cover;">
                             <div class="card-body p-4 d-flex flex-column justify-content-between">

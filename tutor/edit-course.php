@@ -20,7 +20,7 @@ if (!$course) {
     exit;
 }
 
-// 1. Handle Course Details Update
+// 1. Handle Course Details Update & Notify Students
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_course'])) {
     $subtitle = trim($_POST['subtitle']);
     $title = trim($_POST['title']);
@@ -42,11 +42,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_course'])) {
     try {
         $updateStmt = $pdo->prepare("UPDATE courses SET subtitle = ?, title = ?, price = ?, discount_price = ?, learning_outcomes = ?, description = ?, image = ? WHERE id = ?");
         $updateStmt->execute([$subtitle, $title, $price, $discount_price, $learning_outcomes, $description, $image_name, $course_id]);
-        $_SESSION['success'] = "Course updated successfully!";
+
+        // --- NOTIFY ENROLLED STUDENTS (FIXED WITH 'type' COLUMN) ---
+        $enroll_stmt = $pdo->prepare("SELECT student_id FROM enrollments WHERE course_id = ?");
+        $enroll_stmt->execute([$course_id]);
+        $enrolled_students = $enroll_stmt->fetchAll();
+
+        // Database table-e 'type' column thakay ekhane explicit type pass kora lagbe
+        $notif_stmt = $pdo->prepare("INSERT INTO notifications (user_id, title, link, is_read, type) VALUES (?, ?, ?, 0, 'course_update')");
+        
+        foreach ($enrolled_students as $student) {
+            $notif_stmt->execute([
+                $student['student_id'], 
+                "Update in your course: " . $title, 
+                "learn-course.php?id=" . $course_id
+            ]);
+        }
+        // -----------------------------------------------------------
+
+        $_SESSION['success'] = "Course updated and students notified successfully! (Total students: " . count($enrolled_students) . ")";
         header("Location: edit-course.php?id=" . $course_id);
         exit;
     } catch (PDOException $e) {
-        $error = "Failed to update course.";
+        // Eta dile asli database error screen-e dekhte parbi jodi abar jhamela kore
+        echo "Database Error: " . $e->getMessage();
+        exit;
     }
 }
 
@@ -57,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_lesson'])) {
     $l_duration = trim($_POST['duration']);
     $l_desc = trim($_POST['lesson_description']);
 
-    // Auto-convert standard YouTube watch URLs to embed format if needed
     if (strpos($l_url, 'watch?v=') !== false) {
         $l_url = str_replace('watch?v=', 'embed/', $l_url);
     }
@@ -91,7 +110,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_note'])) {
     exit;
 }
 
-// 4. Handle Add Quiz
+// 4. Handle Add Chapter
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_chapter'])) {
+    $c_name = trim($_POST['chapter_name']);
+    $pdo->prepare("INSERT INTO course_chapters (course_id, chapter_name) VALUES (?, ?)")->execute([$course_id, $c_name]);
+    $_SESSION['success'] = "Chapter added successfully!";
+    header("Location: edit-course.php?id=$course_id"); 
+    exit;
+}
+
+// 5. Handle Add Quiz (MCQ)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_quiz'])) {
     $chapter_id = intval($_POST['chapter_id']);
     $q_question = trim($_POST['question']);
@@ -112,52 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_quiz'])) {
     exit;
 }
 
-// Chapter fetch
-$chapters = $pdo->prepare("SELECT * FROM course_chapters WHERE course_id = ?"); 
-$chapters->execute([$course_id]); $chapters = $chapters->fetchAll();
-
-// Handle Add Chapter
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_chapter'])) {
-    $c_name = trim($_POST['chapter_name']);
-    $pdo->prepare("INSERT INTO course_chapters (course_id, chapter_name) VALUES (?, ?)")->execute([$course_id, $c_name]);
-    header("Location: edit-course.php?id=$course_id"); exit;
-}
-
-// Handle Add Quiz (Updated with chapter_id)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_quiz'])) {
-    $chapter_id = intval($_POST['chapter_id']);
-    // ... baki variable gulo ...
-    $pdo->prepare("INSERT INTO course_quizzes (course_id, chapter_id, question, option_a, option_b, option_c, option_d, correct_option) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-        ->execute([$course_id, $chapter_id, $q_question, $opt_a, $opt_b, $opt_c, $opt_d, $correct]);
-    header("Location: edit-course.php?id=$course_id"); exit;
-}
-
-
-// Handle Delete for Lessons, Notes, Quizzes, Live Classes, and Chapters
-if (isset($_GET['delete_type']) && isset($_GET['del_id'])) {
-    $del_id = intval($_GET['del_id']);
-    $type = $_GET['delete_type'];
-    $tbl = '';
-
-    if ($type === 'lesson') $tbl = 'course_lessons';
-    elseif ($type === 'note') $tbl = 'course_notes';
-    elseif ($type === 'quiz') $tbl = 'course_quizzes';
-    elseif ($type === 'live') $tbl = 'live_classes';
-    elseif ($type === 'chapter') {
-        // Optional: Chapter delete korle oi chapter er quiz gulo o delete kore dite paro
-        $pdo->prepare("DELETE FROM course_quizzes WHERE chapter_id = ?")->execute([$del_id]);
-        $tbl = 'course_chapters';
-    }
-
-    if ($tbl) {
-        $pdo->prepare("DELETE FROM $tbl WHERE id = ? AND course_id = ?")->execute([$del_id, $course_id]);
-        $_SESSION['success'] = ucfirst($type) . " deleted successfully!";
-        header("Location: edit-course.php?id=" . $course_id);
-        exit;
-    }
-}
-
-// 5. Handle Live Class Schedule
+// 6. Handle Live Class Schedule
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_live_class'])) {
     $lc_title = trim($_POST['live_title']);
     $lc_link = trim($_POST['meeting_link']);
@@ -170,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_live_class'])) {
     exit;
 }
 
-// 6. Handle Delete for Lessons, Notes, Quizzes, Live Classes
+// 7. Handle Unified Deletions (Lessons, Notes, Quizzes, Live Classes, Chapters)
 if (isset($_GET['delete_type']) && isset($_GET['del_id'])) {
     $del_id = intval($_GET['del_id']);
     $type = $_GET['delete_type'];
@@ -180,16 +163,21 @@ if (isset($_GET['delete_type']) && isset($_GET['del_id'])) {
     elseif ($type === 'note') $tbl = 'course_notes';
     elseif ($type === 'quiz') $tbl = 'course_quizzes';
     elseif ($type === 'live') $tbl = 'live_classes';
+    elseif ($type === 'chapter') {
+        $pdo->prepare("DELETE FROM course_quizzes WHERE chapter_id = ?")->execute([$del_id]);
+        $tbl = 'course_chapters';
+    }
 
     if ($tbl) {
         $pdo->prepare("DELETE FROM $tbl WHERE id = ? AND course_id = ?")->execute([$del_id, $course_id]);
-        $_SESSION['success'] = "Item deleted successfully!";
+        $_SESSION['success'] = ucfirst($type) . " deleted successfully!";
         header("Location: edit-course.php?id=" . $course_id);
         exit;
     }
 }
 
-// Fetch existing data
+// Fetch existing data for rendering
+$chapters = $pdo->prepare("SELECT * FROM course_chapters WHERE course_id = ?"); $chapters->execute([$course_id]); $chapters = $chapters->fetchAll();
 $lessons = $pdo->prepare("SELECT * FROM course_lessons WHERE course_id = ?"); $lessons->execute([$course_id]); $lessons = $lessons->fetchAll();
 $notes = $pdo->prepare("SELECT * FROM course_notes WHERE course_id = ?"); $notes->execute([$course_id]); $notes = $notes->fetchAll();
 $quizzes = $pdo->prepare("SELECT * FROM course_quizzes WHERE course_id = ?"); $quizzes->execute([$course_id]); $quizzes = $quizzes->fetchAll();

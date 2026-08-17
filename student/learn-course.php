@@ -45,7 +45,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_lesson'])) {
     exit;
 }
 
-// 4. Fetch Course Contents
+// 4. Handle Certificate Request Submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_certificate'])) {
+    $cert_chk = $pdo->prepare("SELECT * FROM certificates WHERE student_id = ? AND course_id = ?");
+    $cert_chk->execute([$student_id, $course_id]);
+    $existing_cert = $cert_chk->fetch();
+
+    if (!$existing_cert) {
+        $cert_code = "SLTCP-CERT-" . strtoupper(uniqid());
+        $ins_cert = $pdo->prepare("INSERT INTO certificates (student_id, course_id, certificate_code, status) VALUES (?, ?, ?, 'pending')");
+        $ins_cert->execute([$student_id, $course_id, $cert_code]);
+        $_SESSION['success_msg'] = "Certificate request sent to your tutor successfully!";
+    } else {
+        $_SESSION['success_msg'] = "You have already requested or received a certificate for this course.";
+    }
+    header("Location: learn-course.php?id=" . $course_id);
+    exit;
+}
+
+// 5. Fetch Course Contents
 $lessons = $pdo->prepare("SELECT * FROM course_lessons WHERE course_id = ?");
 $lessons->execute([$course_id]);
 $lessons = $lessons->fetchAll();
@@ -66,7 +84,7 @@ $live_classes = $pdo->prepare("SELECT * FROM live_classes WHERE course_id = ?");
 $live_classes->execute([$course_id]);
 $live_classes = $live_classes->fetchAll();
 
-// 5. Fetch Completed Lessons for Progress Tracking
+// 6. Fetch Completed Lessons for Progress Tracking
 $prog_stmt = $pdo->prepare("SELECT lesson_id FROM lesson_progress WHERE student_id = ? AND course_id = ?");
 $prog_stmt->execute([$student_id, $course_id]);
 $completed_lessons = $prog_stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -75,7 +93,7 @@ $total_lessons = count($lessons);
 $completed_count = count($completed_lessons);
 $progress_percent = ($total_lessons > 0) ? round(($completed_count / $total_lessons) * 100) : 0;
 
-// 6. Active Selected Lesson
+// 7. Active Selected Lesson
 $current_lesson_id = isset($_GET['lesson']) ? intval($_GET['lesson']) : (!empty($lessons) ? $lessons[0]['id'] : 0);
 $active_lesson = null;
 foreach ($lessons as $l) {
@@ -88,11 +106,10 @@ if (!$active_lesson && !empty($lessons)) {
     $active_lesson = $lessons[0];
 }
 
-// 7. Handle Quiz Submission (Ekbar submit korle abar submit korar option thakbe na, result ar answers dekhabe)
+// 8. Handle Quiz Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
     $chapter_id = intval($_POST['chapter_id']);
     
-    // Check if already attempted/submitted
     $chk_res = $pdo->prepare("SELECT id FROM quiz_results WHERE student_id = ? AND chapter_id = ?");
     $chk_res->execute([$student_id, $chapter_id]);
     
@@ -106,9 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
         $score = 0;
         $total_q = count($chap_quizzes);
         
-        // Save detailed answers if needed, or just score
         $ins = $pdo->prepare("INSERT INTO quiz_results (student_id, course_id, chapter_id, score, total_questions) VALUES (?, ?, ?, ?, ?)");
-        $ins->execute([$student_id, $course_id, $chapter_id, 0, $total_q]); // temporary or calculate score
+        $ins->execute([$student_id, $course_id, $chapter_id, 0, $total_q]);
         $result_id = $pdo->lastInsertId();
 
         foreach ($chap_quizzes as $q) {
@@ -116,13 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
             $user_ans = $submitted_answers[$qid] ?? '';
             $is_correct = (strtolower(trim($user_ans)) === strtolower(trim($q['correct_option']))) ? 1 : 0;
             if ($is_correct) $score++;
-
-            // Save individual answer choice
-            $ans_stmt = $pdo->prepare("INSERT INTO student_quiz_answers (student_id, quiz_id, selected_option, is_correct) VALUES (?, ?, ?, ?)");
-            // Note: Make sure student_quiz_answers table exists or handle via JSON/session. Alternatively, we update total score directly.
         }
 
-        // Update exact score
         $upd = $pdo->prepare("UPDATE quiz_results SET score = ? WHERE id = ?");
         $upd->execute([$score, $result_id]);
 
@@ -131,17 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
     
     header("Location: learn-course.php?id=" . $course_id);
     exit;
-}
-
-// 8. Check and Issue Certificate if 100% completed
-if ($progress_percent == 100) {
-    $cert_chk = $pdo->prepare("SELECT * FROM certificates WHERE student_id = ? AND course_id = ?");
-    $cert_chk->execute([$student_id, $course_id]);
-    if (!$cert_chk->fetch()) {
-        $cert_code = "SLTCP-CERT-" . strtoupper(uniqid());
-        $ins_cert = $pdo->prepare("INSERT INTO certificates (student_id, course_id, certificate_code) VALUES (?, ?, ?)");
-        $ins_cert->execute([$student_id, $course_id, $cert_code]);
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -266,7 +266,7 @@ if ($progress_percent == 100) {
             </div>
         </div>
 
-        <!-- Right Side: Curriculum Sidebar with One-Time Quiz Exam & Certificate -->
+        <!-- Right Side: Curriculum Sidebar with Request Certificate Option -->
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style="top: 20px; max-height: 90vh; overflow-y: auto;">
                 <h4 class="fw-bold mb-3">Course Curriculum</h4>
@@ -290,7 +290,7 @@ if ($progress_percent == 100) {
                     </div>
                 </div>
 
-                <!-- Chapter Quizzes & Exam Section (One-Time Submit & Answer View) -->
+                <!-- Chapter Quizzes & Exam Section -->
                 <div>
                     <h6 class="text-muted fw-bold text-uppercase small mb-2">Chapter Quizzes & Exam</h6>
                     <?php if (isset($_SESSION['quiz_msg'])): ?>
@@ -318,7 +318,6 @@ if ($progress_percent == 100) {
                                                     }
                                                 }
 
-                                                // Check if already attempted
                                                 $sc_stmt = $pdo->prepare("SELECT * FROM quiz_results WHERE student_id = ? AND chapter_id = ?");
                                                 $sc_stmt->execute([$student_id, $c['id']]);
                                                 $q_res = $sc_stmt->fetch();
@@ -326,25 +325,17 @@ if ($progress_percent == 100) {
 
                                             <?php if (count($chap_quizzes) > 0): ?>
                                                 <?php if ($q_res): ?>
-                                                    <!-- ALREADY SUBMITTED: SHOW SCORE & CORRECT ANSWERS -->
                                                     <div class="alert alert-success py-2 px-3 small mb-2 text-center">
-                                                        Exam Completed! Your Score: <strong><?php echo $q_res['score']; ?> / <?php echo $q_res['total_questions']; ?></strong>
+                                                        Exam Completed! Score: <strong><?php echo $q_res['score']; ?> / <?php echo $q_res['total_questions']; ?></strong>
                                                     </div>
                                                     <hr class="my-2">
                                                     <?php foreach($chap_quizzes as $qi => $q): ?>
                                                         <div class="mb-2 bg-white p-2 border rounded-2 small">
                                                             <div class="fw-bold text-dark mb-1">Q<?php echo ($qi+1); ?>: <?php echo htmlspecialchars($q['question']); ?></div>
-                                                            <ul class="list-unstyled ps-2 text-muted mb-1">
-                                                                <li>A. <?php echo htmlspecialchars($q['option_a']); ?></li>
-                                                                <li>B. <?php echo htmlspecialchars($q['option_b']); ?></li>
-                                                                <li>C. <?php echo htmlspecialchars($q['option_c']); ?></li>
-                                                                <li>D. <?php echo htmlspecialchars($q['option_d']); ?></li>
-                                                            </ul>
-                                                            <span class="badge bg-success">Correct Option: <?php echo strtoupper($q['correct_option']); ?></span>
+                                                            <span class="badge bg-success">Correct: <?php echo strtoupper($q['correct_option']); ?></span>
                                                         </div>
                                                     <?php endforeach; ?>
                                                 <?php else: ?>
-                                                    <!-- NOT YET SUBMITTED: SHOW EXAM FORM -->
                                                     <form action="" method="POST">
                                                         <input type="hidden" name="chapter_id" value="<?php echo $c['id']; ?>">
                                                         <?php foreach($chap_quizzes as $qi => $q): ?>
@@ -358,7 +349,7 @@ if ($progress_percent == 100) {
                                                                 </div>
                                                             </div>
                                                         <?php endforeach; ?>
-                                                        <button type="submit" name="submit_quiz" class="btn btn-sm btn-primary w-100 fw-bold" onclick="return confirm('Are you sure to submit? You cannot change answers later.');">Submit Quiz Exam</button>
+                                                        <button type="submit" name="submit_quiz" class="btn btn-sm btn-primary w-100 fw-bold">Submit Quiz Exam</button>
                                                     </form>
                                                 <?php endif; ?>
                                             <?php else: ?>
@@ -374,7 +365,7 @@ if ($progress_percent == 100) {
                     <?php endif; ?>
                 </div>
 
-                <!-- Certificate Download Banner if 100% Completed -->
+                <!-- Request Certificate Section if 100% Completed -->
                 <?php if ($progress_percent == 100): ?>
                     <?php 
                         $cert_stmt = $pdo->prepare("SELECT * FROM certificates WHERE student_id = ? AND course_id = ?");
@@ -382,9 +373,30 @@ if ($progress_percent == 100) {
                         $certificate = $cert_stmt->fetch();
                     ?>
                     <div class="card border-0 bg-success bg-opacity-10 rounded-4 p-4 text-center mt-4 shadow-sm">
-                        <h5 class="fw-bold text-success mb-2"><i class="fa-solid fa-award me-2"></i> Course Completed!</h5>
-                        <p class="text-muted small mb-3">Congratulations on finishing all lessons. Your dummy certificate is ready.</p>
-                        <a href="certificate.php?code=<?php echo $certificate['certificate_code'] ?? ''; ?>" target="_blank" class="btn btn-success fw-bold btn-sm py-2"><i class="fa-solid fa-download me-1"></i> Download Certificate</a>
+                        <h5 class="fw-bold text-success mb-2"><i class="fa-solid fa-award me-2"></i> Course 100% Completed!</h5>
+                        
+                        <?php if (isset($_SESSION['success_msg'])): ?>
+                            <div class="alert alert-success py-1 small mb-2"><?php echo $_SESSION['success_msg']; unset($_SESSION['success_msg']); ?></div>
+                        <?php endif; ?>
+
+                        <?php if (!$certificate): ?>
+                            <p class="text-muted small mb-3">Request your certificate of completion from your tutor.</p>
+                            <form action="" method="POST">
+                                <button type="submit" name="request_certificate" class="btn btn-primary fw-bold btn-sm py-2 px-3"><i class="fa-solid fa-paper-plane me-1"></i> Request Certificate</button>
+                            </form>
+                        <?php elseif ($certificate['status'] === 'pending'): ?>
+                            <div class="alert alert-warning py-2 small mb-0">
+                                <i class="fa-solid fa-clock me-1"></i> Certificate request is <strong>Pending</strong> review by your tutor.
+                            </div>
+                        <?php elseif ($certificate['status'] === 'approved'): ?>
+                            <p class="text-muted small mb-3">Your certificate has been approved by your tutor!</p>
+                            <a href="certificate.php?code=<?php echo htmlspecialchars($certificate['certificate_code']); ?>" target="_blank" class="btn btn-success fw-bold btn-sm py-2"><i class="fa-solid fa-download me-1"></i> Download Certificate</a>
+                        <?php elseif ($certificate['status'] === 'rejected'): ?>
+                            <div class="alert alert-danger py-2 small mb-2">Certificate request rejected. Contact tutor.</div>
+                            <form action="" method="POST">
+                                <button type="submit" name="request_certificate" class="btn btn-outline-primary fw-bold btn-sm py-1">Request Again</button>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
 

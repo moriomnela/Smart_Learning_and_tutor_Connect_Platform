@@ -18,9 +18,26 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     $new_status = ($action === 'approve') ? 'approved' : 'rejected';
 
     try {
-        $update_stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ? AND tutor_id = ?");
-        $update_stmt->execute([$new_status, $booking_id, $tutor_id]);
-        $_SESSION['success'] = "Booking status updated to " . $new_status . "!";
+        // 1. Fetch booking info to get student_id
+        $get_booking = $pdo->prepare("SELECT student_id, subject FROM bookings WHERE id = ? AND tutor_id = ?");
+        $get_booking->execute([$booking_id, $tutor_id]);
+        $booking = $get_booking->fetch();
+
+        if ($booking) {
+            // 2. Update booking status
+            $update_stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ? AND tutor_id = ?");
+            $update_stmt->execute([$new_status, $booking_id, $tutor_id]);
+
+            // 3. Insert Notification for the Student
+            $student_id = $booking['student_id'];
+            $notif_title = "Your booking for " . $booking['subject'] . " has been " . $new_status . ".";
+            $notif_link = "bookings.php";
+            
+            $notif_stmt = $pdo->prepare("INSERT INTO notifications (user_id, title, link, is_read) VALUES (?, ?, ?, 0)");
+            $notif_stmt->execute([$student_id, $notif_title, $notif_link]);
+
+            $_SESSION['success'] = "Booking status updated to " . $new_status . "!";
+        }
     } catch (PDOException $e) {
         $_SESSION['error'] = "Failed to update booking status.";
     }
@@ -44,6 +61,7 @@ try {
     echo "Query Error: " . $e->getMessage();
     $bookings = [];
 }
+
 
 ?>
 <!DOCTYPE html>

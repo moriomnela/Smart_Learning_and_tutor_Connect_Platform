@@ -7,9 +7,9 @@ require_once 'config/db.php';
 $blog_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 try {
-    // 1. Fetch Current Blog Details with Author Information
+    // 1. Fetch Current Blog Details with Author Information (Added u.avatar)
     $stmt = $pdo->prepare("
-        SELECT b.*, u.full_name AS author_name, u.email AS author_email, u.role AS author_role 
+        SELECT b.*, u.full_name AS author_name, u.email AS author_email, u.role AS author_role, u.avatar AS author_avatar 
         FROM blogs b 
         JOIN users u ON b.author_id = u.id 
         WHERE b.id = ?
@@ -63,7 +63,6 @@ try {
                         
                         <div class="post-body text-muted line-height-lg">
                             <?php 
-                                // Render main content safely (supports HTML formatting or line breaks)
                                 echo nl2br($blog['content']); 
                             ?>
                         </div>
@@ -95,17 +94,23 @@ try {
                     </div>
                 </article>
 
-                <!-- Author Box -->
+                <!-- Author Box with Dynamic Avatar -->
+                <?php 
+                    $author_avatar = $blog['author_avatar'] ?? '';
+                    if (!empty($author_avatar) && $author_avatar !== 'default-avatar.png') {
+                        $author_avatar_path = (str_starts_with($author_avatar, 'assets/')) ? $author_avatar : 'assets/img/profiles/' . $author_avatar;
+                    } else {
+                        $author_avatar_path = 'assets/img/profiles/default-avatar.png';
+                    }
+                ?>
                 <div class="author-box mt-5 bg-white p-4 p-md-5 rounded-4 shadow-sm border d-flex flex-column flex-md-row align-items-center gap-4">
                     <div class="author-img-wrap shrink-0">
-                        <img src="https://dummyimage.com/150x150/f59e0b/ffffff.jpg&text=Author" alt="Author" class="rounded-circle img-fluid" width="90" height="90">
+                        <img src="<?php echo htmlspecialchars($author_avatar_path); ?>" alt="<?php echo htmlspecialchars($blog['author_name']); ?>" class="rounded-circle img-fluid object-fit-cover border" width="90" height="90" onerror="this.src='assets/img/profiles/default-avatar.png';">
                     </div>
                     <div class="author-info text-center text-md-start">
                         <h4 class="fw-bold mb-2">
                             Written by 
-                            <?php 
-                            
-                            if (isset($blog['author_role']) && $blog['author_role'] === 'tutor'): ?>
+                            <?php if (isset($blog['author_role']) && $blog['author_role'] === 'tutor'): ?>
                                 <a href="tutor-details.php?id=<?php echo $blog['author_id']; ?>" class="text-primary text-decoration-none">
                                     <?php echo htmlspecialchars($blog['author_name']); ?>
                                 </a>

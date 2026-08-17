@@ -18,7 +18,7 @@
 
         <!-- Slide 1 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-code"></i></div>
             <h5>Web Development</h5>
             <p class="text-small">120+ Courses</p>
@@ -27,7 +27,7 @@
 
         <!-- Slide 2 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-palette"></i></div>
             <h5>UI/UX Design</h5>
             <p class="text-small">85+ Courses</p>
@@ -36,7 +36,7 @@
 
         <!-- Slide 3 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
             <h5>Digital Marketing</h5>
             <p class="text-small">95+ Courses</p>
@@ -45,7 +45,7 @@
 
         <!-- Slide 4 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
             <h5>Data Science</h5>
             <p class="text-small">60+ Courses</p>
@@ -54,7 +54,7 @@
 
         <!-- Slide 5 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
             <h5>App Development</h5>
             <p class="text-small">70+ Courses</p>
@@ -63,7 +63,7 @@
 
         <!-- Slide 6 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-wallet"></i></div>
             <h5>Business & Finance</h5>
             <p class="text-small">110+ Courses</p>
@@ -72,7 +72,7 @@
 
         <!-- Slide 7 -->
         <div class="swiper-slide">
-          <a href="#" class="category-card">
+          <a href="courses.php" class="category-card">
             <div class="icon-box"><i class="fa-solid fa-camera"></i></div>
             <h5>Photography</h5>
             <p class="text-small">45+ Courses</p>
