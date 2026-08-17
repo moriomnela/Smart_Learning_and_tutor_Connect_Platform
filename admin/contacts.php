@@ -47,7 +47,7 @@ $page_title = "Admin - Contact Messages";
 
 <div class="dashboard-wrapper d-flex">
     <!-- Admin Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; min-height: 100vh;">
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Admin</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="dashboard.php" class="nav-link p-2 rounded text-black"><i class="fa-solid fa-chart-line me-2"></i> Overview</a></li>

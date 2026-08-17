@@ -90,7 +90,7 @@ $page_title = "Edit Tutor Profile";
 
 <div class="dashboard-wrapper d-flex">
     <!-- Tutor Sidebar -->
-    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; min-height: 100vh;">
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
         <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Tutor</h4>
         <ul class="list-unstyled d-flex flex-column gap-2">
             <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chalkboard-user me-2"></i> Overview</a></li>
@@ -100,6 +100,7 @@ $page_title = "Edit Tutor Profile";
             <li><a href="earnings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-wallet me-2"></i> Earnings</a></li>
             <li><a href="add-blog.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-pen-nib me-2"></i> Add New Blog</a></li>
             <li><a href="my-blogs.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open-reader me-2"></i> My Blogs</a></li>            
+            <li><a href="manage-certificates.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-certificate me-2"></i> Certificate Requests</a></li>
             <li><a href="profile.php" class="nav-link active fw-bold text-primary bg-light p-2 rounded"><i class="fa-solid fa-user-gear me-2"></i> Edit Profile</a></li>
             <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
         </ul>

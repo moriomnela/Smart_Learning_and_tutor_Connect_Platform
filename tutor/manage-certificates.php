@@ -63,91 +63,109 @@ try {
 </head>
 <body class="bg-light">
 
-<div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Student Certificate Requests</h2>
-        <a href="dashboard.php" class="btn btn-outline-secondary btn-sm fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Back to Dashboard</a>
+<div class="dashboard-wrapper d-flex">
+    <!-- Tutor Sidebar -->
+    <div class="dashboard-sidebar bg-white border-end p-4" style="width: 280px; height: 100vh; position: sticky; top: 0;">
+        <h4 class="fw-bold text-primary mb-4">SLTCP<span class="text-warning">.</span> Tutor</h4>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="dashboard.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-chalkboard-user me-2"></i> Overview</a></li>
+            <li><a href="my-courses.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open me-2"></i> My Courses</a></li>
+            <li><a href="add-course.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-plus-circle me-2"></i> Add New Course</a></li>
+            <li><a href="bookings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-calendar-check me-2"></i> Student Bookings</a></li>
+            <li><a href="earnings.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-wallet me-2"></i> Earnings</a></li>
+            <li><a href="add-blog.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-pen-nib me-2"></i> Add New Blog</a></li>
+            <li><a href="my-blogs.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-book-open-reader me-2"></i> My Blogs</a></li>            
+            <li><a href="profile.php" class="nav-link active p-2 rounded fw-bold text-primary bg-light"><i class="fa-solid fa-certificate me-2"></i> Certificate Requests</a></li>
+            <li><a href="profile.php" class="nav-link p-2 rounded text-dark"><i class="fa-solid fa-user-gear me-2"></i> Edit Profile</a></li>
+            <li class="mt-4"><a href="../logout.php" class="nav-link p-2 rounded text-danger fw-bold"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+        </ul>
     </div>
 
-    <?php if (isset($_SESSION['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <!-- Main Content -->
+    <div class="dashboard-content flex-grow-1 p-5 bg-light">
+        <h2 class="fw-bold mb-4">Student Certificate Requests</h2>
 
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-
-    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
-        <div class="card-body p-4">
-            <?php if (count($requests) > 0): ?>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Student Name</th>
-                                <th>Course Title</th>
-                                <th>Certificate Code</th>
-                                <th>Status</th>
-                                <th class="text-end">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($requests as $req): ?>
-                                <tr>
-                                    <td>
-                                        <div class="fw-bold text-dark"><?php echo htmlspecialchars($req['student_name']); ?></div>
-                                        <small class="text-muted"><?php echo htmlspecialchars($req['student_email']); ?></small>
-                                    </td>
-                                    <td>
-                                        <span class="fw-semibold text-primary"><?php echo htmlspecialchars($req['course_title']); ?></span>
-                                    </td>
-                                    <td>
-                                        <code><?php echo htmlspecialchars($req['certificate_code']); ?></code>
-                                    </td>
-                                    <td>
-                                        <?php if ($req['status'] === 'pending'): ?>
-                                            <span class="badge bg-warning text-dark px-2 py-1">Pending</span>
-                                        <?php elseif ($req['status'] === 'approved'): ?>
-                                            <span class="badge bg-success px-2 py-1">Approved</span>
-                                        <?php elseif ($req['status'] === 'rejected'): ?>
-                                            <span class="badge bg-danger px-2 py-1">Rejected</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td class="text-end">
-                                        <?php if ($req['status'] === 'pending'): ?>
-                                            <form action="" method="POST" class="d-inline-flex gap-2">
-                                                <input type="hidden" name="cert_id" value="<?php echo $req['id']; ?>">
-                                                <button type="submit" name="action_cert" value="1" onclick="this.form.action_type.value='approved'" class="btn btn-sm btn-success fw-bold px-3">
-                                                    <i class="fa-solid fa-check me-1"></i> Approve
-                                                </button>
-                                                <input type="hidden" name="action_type" value="">
-                                                <button type="submit" name="action_cert" value="1" onclick="this.form.action_type.value='rejected'" class="btn btn-sm btn-outline-danger fw-bold px-3">
-                                                    <i class="fa-solid fa-xmark me-1"></i> Reject
-                                                </button>
-                                            </form>
-                                        <?php else: ?>
-                                            <span class="text-muted small fst-italic">Action completed</span>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php else: ?>
-                <div class="text-center py-5">
-                    <p class="text-muted mb-0">No certificate requests found from students yet.</p>
-                </div>
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <?php endif; ?>
+            
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php endif; ?>
+                
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+            <div class="card-body p-4">
+                <?php if (count($requests) > 0): ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Course Title</th>
+                                    <th>Certificate Code</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($requests as $req): ?>
+                                    <tr>
+                                        <td>
+                                            <div class="fw-bold text-dark"><?php echo htmlspecialchars($req['student_name']); ?></div>
+                                            <small class="text-muted"><?php echo htmlspecialchars($req['student_email']); ?></small>
+                                        </td>
+                                        <td>
+                                            <span class="fw-semibold text-primary"><?php echo htmlspecialchars($req['course_title']); ?></span>
+                                        </td>
+                                        <td>
+                                            <code><?php echo htmlspecialchars($req['certificate_code']); ?></code>
+                                        </td>
+                                        <td>
+                                            <?php if ($req['status'] === 'pending'): ?>
+                                                <span class="badge bg-warning text-dark px-2 py-1">Pending</span>
+                                            <?php elseif ($req['status'] === 'approved'): ?>
+                                                <span class="badge bg-success px-2 py-1">Approved</span>
+                                            <?php elseif ($req['status'] === 'rejected'): ?>
+                                                <span class="badge bg-danger px-2 py-1">Rejected</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="text-end">
+                                            <?php if ($req['status'] === 'pending'): ?>
+                                                <form action="" method="POST" class="d-inline-flex gap-2">
+                                                    <input type="hidden" name="cert_id" value="<?php echo $req['id']; ?>">
+                                                    <button type="submit" name="action_cert" value="1" onclick="this.form.action_type.value='approved'" class="btn btn-sm btn-success fw-bold px-3">
+                                                        <i class="fa-solid fa-check me-1"></i> Approve
+                                                    </button>
+                                                    <input type="hidden" name="action_type" value="">
+                                                    <button type="submit" name="action_cert" value="1" onclick="this.form.action_type.value='rejected'" class="btn btn-sm btn-outline-danger fw-bold px-3">
+                                                        <i class="fa-solid fa-xmark me-1"></i> Reject
+                                                    </button>
+                                                </form>
+                                            <?php else: ?>
+                                                <span class="text-muted small fst-italic">Action completed</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center py-5">
+                        <p class="text-muted mb-0">No certificate requests found from students yet.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
