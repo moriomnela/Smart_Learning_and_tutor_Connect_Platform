@@ -104,7 +104,7 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                         </div>
 
                         <!-- Checkout / Bulk Enroll Button -->
-                        <a href="backend/checkout-process.php" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 text-white text-center text-decoration-none shadow-sm">
+                        <a href="checkout.php" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 text-white text-center text-decoration-none shadow-sm">
                             Proceed to Checkout
                         </a>
                     </div>

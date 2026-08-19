@@ -347,7 +347,8 @@ $page_title = $course['title'];
                         <?php if ($is_enrolled): ?>
                             <div class="alert alert-success text-center fw-bold mb-0 py-3">You are already enrolled!</div>
                         <?php elseif (isset($_SESSION['is_logged_in']) && $_SESSION['role'] === 'student'): ?>
-                            <a href="backend/enroll-process.php?course_id=<?php echo $course['id']; ?>" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 text-white text-center text-decoration-none">Enroll Now</a>
+                            <!-- Enroll Now er sathe cart-e add kore direct checkout-e pathar system -->
+                            <a href="backend/buy-now.php?id=<?php echo $course['id']; ?>" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 text-white text-center text-decoration-none">Enroll Now</a>
                             <a href="backend/add-to-cart.php?id=<?php echo $course['id']; ?>" class="btn btn-outline-secondary w-100 py-3 fw-bold rounded-3">Add to Cart</a>
                         <?php elseif (isset($_SESSION['is_logged_in']) && $_SESSION['role'] !== 'student'): ?>
                             <p class="text-muted text-center small mb-0">Tutors or Admins cannot enroll in courses.</p>
